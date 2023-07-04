@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
 
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/scrollbar";
+
+// import required modules
+import { Scrollbar } from "swiper/modules";
+
 const Home = () => {
   const [showingMovies, setShowingMovies] = useState([]);
 
@@ -39,36 +49,37 @@ const Home = () => {
           </h1>
         </div>
         <img
-          className="w-full max-h-[300px] object-cover"
+          className="w-full max-h-[500px] object-cover"
           src="https://images.pexels.com/photos/8263349/pexels-photo-8263349.jpeg"
           alt=""
         />
       </div>
+
       <div className="mt-10">
         <h1 className="text-2xl sm:text-3xl mb-5">
           <span className="font-bold">Showing </span> Movies
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {showingMovies.map((movies, index) => (
-            <div
-              className="flex flex-col gap-3 bg-white shadow-md rounded"
-              key={index}
-            >
-              <div className="w-100 rounded">
+        <div className="flex flex-row">
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={35}
+            scrollbar={{
+              hide: true,
+            }}
+            modules={[Scrollbar]}
+            className="mySwiper"
+          >
+            {showingMovies.map((movies) => (
+              <SwiperSlide key={movies.id}>
                 <img
-                  className="rounded-t object-cover"
+                  className="rounded-t object-cover lg:!w-[100%]"
                   src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
                   alt={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
                 />
-              </div>
-
-              <div className="px-4 py-2">
-                <h1 className="font-bold mb-3">{movies.original_title}</h1>
-                <p>{movies.overview}</p>
-              </div>
-            </div>
-          ))}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </div>
@@ -76,3 +87,20 @@ const Home = () => {
 };
 
 export default Home;
+
+// <div className="flex flex-col gap-3 bg-white shadow-md rounded">
+// <div className="w-100 rounded">
+//   <img
+//     className="rounded-t object-cover"
+//     src={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
+//     alt={`https://image.tmdb.org/t/p/w500${movies.poster_path}`}
+//   />
+// </div>
+
+// <div className="px-4 py-2">
+//   <h1 className="font-bold mb-3">
+//     {movies.original_title}
+//   </h1>
+//   <p>{movies.overview}</p>
+// </div>
+// </div>
