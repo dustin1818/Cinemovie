@@ -45,7 +45,7 @@ const Navbar = () => {
         <input
           className="bg-transparent p-2 w-full focus:outline-none"
           type="text"
-          placeholder="Search movies"
+          placeholder="Search movies / series..."
         />
       </div>
 
