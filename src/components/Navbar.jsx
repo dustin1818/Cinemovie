@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 
-const Navbar = () => {
+const Navbar = ({
+  moviesAPI,
+  setMoviesAPI,
+  seriesAPI,
+  setSeriesAPI,
+  toggleBtn2,
+  setToggleBtn2,
+}) => {
   const [toggleBtn, setToggleBtn] = useState(false);
-  const [toggleBtn2, setToggleBtn2] = useState(false);
-  console.log(toggleBtn);
-
+  if (toggleBtn2 === false) {
+    console.log(seriesAPI);
+  } else {
+    console.log(moviesAPI);
+  }
   return (
     <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
       <div className="flex items-center">
@@ -18,7 +27,7 @@ const Navbar = () => {
         </h1>
         <div className="hidden lg:flex items-center bg-gray-200 rounded-full p-[3px] text-[14px]">
           <p
-            onClick={(e) => setToggleBtn2(!toggleBtn2)}
+            onClick={(e) => setToggleBtn2(true) && setMoviesAPI(moviesAPI)}
             className={
               toggleBtn2
                 ? "bg-black text-white rounded-full p-2"
@@ -28,9 +37,9 @@ const Navbar = () => {
             Movie
           </p>
           <p
-            onClick={(e) => setToggleBtn2(!toggleBtn2)}
+            onClick={(e) => setToggleBtn2(false) && setSeriesAPI(seriesAPI)}
             className={
-              !toggleBtn2
+              toggleBtn2 === false
                 ? "bg-black text-white rounded-full p-2"
                 : "bg-transparent text-black rounded-full p-2"
             }
@@ -48,8 +57,6 @@ const Navbar = () => {
           placeholder="Search movies / series..."
         />
       </div>
-
-      {/* Mobile Menu and Overlay  */}
 
       {toggleBtn ? (
         <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0 "></div>
@@ -81,6 +88,29 @@ const Navbar = () => {
             <Link to={"/contact"}>
               <li className="text-xl py-4"> Contacts</li>
             </Link>
+
+            <div className="flex lg:hidden items-center bg-gray-200 rounded-full p-[3px] text-[14px] w-[118px] mt-5">
+              <p
+                onClick={(e) => setToggleBtn2(true) && setMoviesAPI(moviesAPI)}
+                className={
+                  toggleBtn2
+                    ? "bg-black text-white rounded-full p-2"
+                    : "bg-transparent text-black rounded-full p-2"
+                }
+              >
+                Movie
+              </p>
+              <p
+                onClick={(e) => setToggleBtn2(false) && setSeriesAPI(seriesAPI)}
+                className={
+                  toggleBtn2 === false
+                    ? "bg-black text-white rounded-full p-2"
+                    : "bg-transparent text-black rounded-full p-2"
+                }
+              >
+                Series
+              </p>
+            </div>
           </ul>
         </nav>
       </div>
