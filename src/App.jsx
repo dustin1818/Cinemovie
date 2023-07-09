@@ -18,7 +18,6 @@ import MiniLoader from "./components/MiniLoader";
 import BigLoader from "./components/BigLoader";
 
 function App() {
-  //Update API STATE TO MOVIE OR SERIES
   const [moviesAPI, setMoviesAPI] = useState("movies api");
   const [seriesAPI, setSeriesAPI] = useState("series api");
 
@@ -33,37 +32,38 @@ function App() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
+
+  // API FOR MOVIES
+  let API_URL_NEW = toggleBtn2
+    ? "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
+    : "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1";
+
+  let API_URL_POPULAR = toggleBtn2
+    ? "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+    : "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1";
+
+  let API_URL_TOPRATED = toggleBtn2
+    ? "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
+    : "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1";
+
+  let API_URL_UPCOMING = toggleBtn2
+    ? "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
+    : "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1";
+
+  let API_URL_TRENDING = toggleBtn2
+    ? "https://api.themoviedb.org/3/trending/all/day?language=en-US"
+    : "https://api.themoviedb.org/3/trending/all/day?language=en-US";
+
+  let options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOTIyZGQ1NjIwN2QzZmU5ODMyNTI1NDEwZWQ3NDZmMiIsInN1YiI6IjYxMDkxMWExMmY4ZDA5MDA0OGU5ZWQ5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EL9RLiEv0kAhIhDOY0UnQkka_X4fTF5Lqa10DPFJBNg",
+    },
+  };
+
   useEffect(() => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOTIyZGQ1NjIwN2QzZmU5ODMyNTI1NDEwZWQ3NDZmMiIsInN1YiI6IjYxMDkxMWExMmY4ZDA5MDA0OGU5ZWQ5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EL9RLiEv0kAhIhDOY0UnQkka_X4fTF5Lqa10DPFJBNg",
-      },
-    };
-
-    // API FOR MOVIES
-    let API_URL_NEW = toggleBtn2
-      ? "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
-      : "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1";
-
-    let API_URL_POPULAR = toggleBtn2
-      ? "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
-      : "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1";
-
-    let API_URL_TOPRATED = toggleBtn2
-      ? "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1"
-      : "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1";
-
-    let API_URL_UPCOMING = toggleBtn2
-      ? "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
-      : "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1";
-
-    let API_URL_TRENDING = toggleBtn2
-      ? "https://api.themoviedb.org/3/trending/all/day?language=en-US"
-      : "https://api.themoviedb.org/3/trending/all/day?language=en-US";
-
     const fetchMovies = async () => {
       try {
         setLoading(true);
@@ -95,11 +95,11 @@ function App() {
         const data3 = await response3.json();
         const data4 = await response4.json();
         const data5 = await response5.json();
-        setShowingMovies(data.results);
-        setPopularMovies(data2.results);
-        setTopRatedMovies(data3.results);
-        setUpcomingMovies(data4.results);
-        setTrendingMovies(data5.results);
+        setShowingMovies(data);
+        setPopularMovies(data2);
+        setTopRatedMovies(data3);
+        setUpcomingMovies(data4);
+        setTrendingMovies(data5);
       } catch (e) {
         console.log("Error Try Catch Block: ", e);
       } finally {
@@ -187,7 +187,7 @@ function App() {
                         modules={[Scrollbar]}
                         className="mySwiper"
                       >
-                        {showingMovies.map((movies) => (
+                        {showingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
                               <img
@@ -236,7 +236,7 @@ function App() {
                         modules={[Scrollbar]}
                         className="mySwiper"
                       >
-                        {popularMovies.map((movies) => (
+                        {popularMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
                               <img
@@ -285,7 +285,7 @@ function App() {
                         modules={[Scrollbar]}
                         className="mySwiper"
                       >
-                        {topRatedMovies.map((movies) => (
+                        {topRatedMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
                               <img
@@ -341,7 +341,7 @@ function App() {
                         modules={[Scrollbar]}
                         className="mySwiper"
                       >
-                        {upcomingMovies.map((movies) => (
+                        {upcomingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
                               <img
@@ -391,7 +391,7 @@ function App() {
                         modules={[Scrollbar]}
                         className="mySwiper"
                       >
-                        {trendingMovies.map((movies) => (
+                        {trendingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
                               <img
@@ -410,7 +410,16 @@ function App() {
             />
             {/* ROUTE TRENDING  */}
             <Route path="/showing" element={<Showing />} />
-            <Route path="/popular" element={<Popular />} />
+            <Route
+              path="/popular"
+              element={
+                <Popular
+                  API_URL_POPULAR={API_URL_POPULAR}
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                />
+              }
+            />
             <Route path="/trending" element={<Trending />} />
             <Route path="/toprated" element={<TopRated />} />
             <Route path="/upcoming" element={<Upcoming />} />

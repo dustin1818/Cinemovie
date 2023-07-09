@@ -66,6 +66,25 @@ body {
   opacity: 1 !important;
 }
 
+.movie-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+}
+
+@media screen and (min-width: 768px) {
+  .movie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(166px, 1fr));
+  }
+}
+
+@media screen and (min-width: 1020px) {
+  .movie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(326px, 1fr));
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
