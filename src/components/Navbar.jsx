@@ -9,6 +9,7 @@ const Navbar = ({
   setSeriesAPI,
   toggleBtn2,
   setToggleBtn2,
+  setLoading,
 }) => {
   const [toggleBtn, setToggleBtn] = useState(false);
   if (toggleBtn2 === false) {
@@ -17,7 +18,7 @@ const Navbar = ({
     console.log(moviesAPI);
   }
   return (
-    <div className="max-w-[1640px] mx-auto flex justify-between items-center p-4">
+    <div className="max-w-[1920px] mx-auto flex justify-between items-center p-4">
       <div className="flex items-center">
         <div className="cursor-pointer">
           <AiOutlineMenu size={30} onClick={(e) => setToggleBtn(!toggleBtn)} />
@@ -27,7 +28,9 @@ const Navbar = ({
         </h1>
         <div className="hidden lg:flex items-center bg-gray-200 rounded-full p-[3px] text-[14px]">
           <p
-            onClick={(e) => setToggleBtn2(true) && setMoviesAPI(moviesAPI)}
+            onClick={(e) =>
+              setToggleBtn2(true) && setLoading(true) && setMoviesAPI(moviesAPI)
+            }
             className={
               toggleBtn2
                 ? "bg-black text-white rounded-full p-2"
@@ -37,7 +40,11 @@ const Navbar = ({
             Movie
           </p>
           <p
-            onClick={(e) => setToggleBtn2(false) && setSeriesAPI(seriesAPI)}
+            onClick={(e) =>
+              setToggleBtn2(false) &&
+              setLoading(true) &&
+              setSeriesAPI(seriesAPI)
+            }
             className={
               toggleBtn2 === false
                 ? "bg-black text-white rounded-full p-2"
