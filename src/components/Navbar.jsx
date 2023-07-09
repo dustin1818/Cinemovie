@@ -89,11 +89,20 @@ const Navbar = ({
             <Link to={"/"}>
               <li className="text-xl py-4"> Home</li>
             </Link>
+            <Link to={"/showing"}>
+              <li className="text-xl py-4"> Showing</li>
+            </Link>
+            <Link to={"/popular"}>
+              <li className="text-xl py-4"> Popular</li>
+            </Link>
+            <Link to={"/toprated"}>
+              <li className="text-xl py-4">Top Rated</li>
+            </Link>
+            <Link to={"/upcoming"}>
+              <li className="text-xl py-4"> Upcoming</li>
+            </Link>
             <Link to={"/trending"}>
               <li className="text-xl py-4"> Trending</li>
-            </Link>
-            <Link to={"/contact"}>
-              <li className="text-xl py-4"> Contacts</li>
             </Link>
 
             <div className="flex lg:hidden items-center bg-gray-200 rounded-full p-[3px] text-[14px] w-[118px] mt-5">

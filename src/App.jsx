@@ -1,6 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Trending from "./components/Trending";
+import Trending from "./components/pages/Trending";
+import Showing from "./components/pages/Showing";
+import Popular from "./components/pages/Popular";
+import TopRated from "./components/pages/TopRated";
+import Upcoming from "./components/pages/Upcoming";
+
 import Footer from "./components/Footer";
 import React, { useEffect, useState } from "react";
 
@@ -404,7 +409,11 @@ function App() {
               }
             />
             {/* ROUTE TRENDING  */}
+            <Route path="/showing" element={<Showing />} />
+            <Route path="/popular" element={<Popular />} />
             <Route path="/trending" element={<Trending />} />
+            <Route path="/toprated" element={<TopRated />} />
+            <Route path="/upcoming" element={<Upcoming />} />
             <Route path="*" element={<h1>Page Not Found!</h1>} />
           </Routes>
         </Router>
