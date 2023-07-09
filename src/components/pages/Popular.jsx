@@ -58,11 +58,12 @@ const Popular = ({ toggleBtn2, API_URL_POPULAR, options }) => {
           pageRangeDisplayed={3}
           onPageChange={handlePageClick}
           containerClassName="list-style-none flex justify-center"
-          previousLinkClassName="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-500 transition-all duration-300"
-          pageLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-950 transition-all duration-300 hover:bg-neutral-100"
-          nextLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100"
-          breakLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-950 transition-all duration-300 hover:bg-neutral-100"
-          activeClassName="bg-white text-white shadow-sm "
+          previousLinkClassName="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-500"
+          pageLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-950 hover:bg-neutral-100"
+          nextLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-100"
+          breakLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-950 hover:bg-neutral-100"
+          activeClassName="relative block rounded !bg-black !text-white !shadow-md"
+          activeLinkClassName="relative block rounded !bg-black !text-white"
         />
       </nav>
     </div>
