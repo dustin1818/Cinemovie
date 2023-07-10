@@ -165,7 +165,7 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 5,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                           },
                           640: {
@@ -215,7 +215,7 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 5,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                           },
                           640: {
@@ -265,7 +265,7 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 5,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                           },
                           640: {
@@ -322,7 +322,7 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 5,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                           },
                           640: {
@@ -373,7 +373,7 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 5,
+                            slidesPerView: 4,
                             spaceBetween: 10,
                           },
                           640: {

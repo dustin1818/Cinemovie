@@ -10,7 +10,7 @@ const Card = ({ newPopularMovie }) => {
           <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full rounded border-none ">
             <LazyLoadImage
               effect="blur"
-              className="max-w-xs transition duration-300 ease-in-out hover:scale-105 h-[180px] lg:h-full rounded"
+              className="max-w-xs transition duration-300 ease-in-out hover:scale-105 h-[160px] lg:h-full rounded"
               src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
               alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
             />

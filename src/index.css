@@ -31,8 +31,12 @@ a:hover {
   color: #dc2626;
 }
 
+a::selection {
+  color: #dc2626 !important;
+}
+
 a:active {
-  color: #dc2626;
+  color: #dc2626 !important;
 }
 
 body {
@@ -72,13 +76,13 @@ body {
 
 .movie-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
 }
 
 @media screen and (min-width: 768px) {
   .movie-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(166px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 }
 
