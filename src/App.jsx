@@ -5,9 +5,9 @@ import Showing from "./components/pages/Showing";
 import Popular from "./components/pages/Popular";
 import TopRated from "./components/pages/TopRated";
 import Upcoming from "./components/pages/Upcoming";
-
-import Footer from "./components/Footer";
 import React, { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 // Import Swiper React components/styles/modules
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -165,15 +165,15 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 3,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           640: {
-                            slidesPerView: 4,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           768: {
-                            slidesPerView: 5,
+                            slidesPerView: 6,
                             spaceBetween: 10,
                           },
                           1024: {
@@ -190,10 +190,11 @@ function App() {
                         {showingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
-                              <img
+                              <LazyLoadImage
+                                effect="blur"
                                 className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
-                                src={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
                             </div>
                           </SwiperSlide>
@@ -214,15 +215,15 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 3,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           640: {
-                            slidesPerView: 4,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           768: {
-                            slidesPerView: 5,
+                            slidesPerView: 6,
                             spaceBetween: 10,
                           },
                           1024: {
@@ -239,10 +240,11 @@ function App() {
                         {popularMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
-                              <img
+                              <LazyLoadImage
+                                effect="blur"
                                 className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
-                                src={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
                             </div>
                           </SwiperSlide>
@@ -263,15 +265,15 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 3,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           640: {
-                            slidesPerView: 4,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           768: {
-                            slidesPerView: 5,
+                            slidesPerView: 6,
                             spaceBetween: 10,
                           },
                           1024: {
@@ -288,10 +290,11 @@ function App() {
                         {topRatedMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
-                              <img
+                              <LazyLoadImage
+                                effect="blur"
                                 className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
-                                src={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
                             </div>
                           </SwiperSlide>
@@ -319,15 +322,15 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 3,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           640: {
-                            slidesPerView: 4,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           768: {
-                            slidesPerView: 5,
+                            slidesPerView: 6,
                             spaceBetween: 10,
                           },
                           1024: {
@@ -344,10 +347,11 @@ function App() {
                         {upcomingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
-                              <img
+                              <LazyLoadImage
+                                effect="blur"
                                 className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
-                                src={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
                             </div>
                           </SwiperSlide>
@@ -369,15 +373,15 @@ function App() {
                         spaceBetween={35}
                         breakpoints={{
                           320: {
-                            slidesPerView: 3,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           640: {
-                            slidesPerView: 4,
+                            slidesPerView: 5,
                             spaceBetween: 10,
                           },
                           768: {
-                            slidesPerView: 5,
+                            slidesPerView: 6,
                             spaceBetween: 10,
                           },
                           1024: {
@@ -394,10 +398,11 @@ function App() {
                         {trendingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
                             <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
-                              <img
+                              <LazyLoadImage
+                                effect="blur"
                                 className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
-                                src={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/original/${movies.poster_path}`}
+                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
+                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
                             </div>
                           </SwiperSlide>

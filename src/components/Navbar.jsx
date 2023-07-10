@@ -23,9 +23,11 @@ const Navbar = ({
         <div className="cursor-pointer">
           <AiOutlineMenu size={30} onClick={(e) => setToggleBtn(!toggleBtn)} />
         </div>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2">
-          Cine<span className="font-bold">movie</span>
-        </h1>
+        <Link to={"/"}>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2">
+            Cine<span className="font-bold">movie</span>
+          </h1>
+        </Link>
         <div className="hidden lg:flex items-center bg-gray-200 rounded-full p-[3px] text-[14px]">
           <p
             onClick={(e) =>
@@ -81,9 +83,12 @@ const Navbar = ({
           className="absolute right-4 top-4 cursor-pointer"
           onClick={(e) => setToggleBtn(!toggleBtn)}
         />
-        <h2 className="text-2xl p-4">
-          Cine<span className="font-bold">movie</span>
-        </h2>
+        <Link to={"/"}>
+          <h2 className="text-2xl p-4">
+            Cine<span className="font-bold">movie</span>
+          </h2>
+        </Link>
+
         <nav>
           <ul className="flex flex-col p-4 text-gray-800">
             <Link to={"/"}>
