@@ -21,7 +21,11 @@ const Navbar = ({
     <div className="max-w-[1920px] mx-auto flex justify-between items-center p-4">
       <div className="flex items-center">
         <div className="cursor-pointer">
-          <AiOutlineMenu size={30} onClick={(e) => setToggleBtn(!toggleBtn)} />
+          <AiOutlineMenu
+            className="h-[20px] w-[20px] md:h-[30px] md:w-[30px]"
+            size={30}
+            onClick={(e) => setToggleBtn(!toggleBtn)}
+          />
         </div>
         <Link to={"/"}>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2">
@@ -59,9 +63,12 @@ const Navbar = ({
       </div>
 
       <div className="bg-gray-200 rounded-full flex items-center px-2 w-[200px] sm:w-[400px] lg:w-[500px]">
-        <AiOutlineSearch size={20} />
+        <AiOutlineSearch
+          className="h-[15px] w-[15px] md:h-[30px] md:w-[30px]"
+          size={20}
+        />
         <input
-          className="bg-transparent p-2 w-full focus:outline-none"
+          className="bg-transparent p-2 w-full focus:outline-none text-sm"
           type="text"
           placeholder="Search movies / series..."
         />
@@ -80,7 +87,7 @@ const Navbar = ({
       >
         <AiOutlineClose
           size={30}
-          className="absolute right-4 top-4 cursor-pointer"
+          className="absolute right-4 top-4 cursor-pointer h-[20px] w-[20px] md:h-[30px] md:w-[30px]  "
           onClick={(e) => setToggleBtn(!toggleBtn)}
         />
         <Link to={"/"}>

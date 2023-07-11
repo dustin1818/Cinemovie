@@ -133,11 +133,13 @@ function App() {
                 <div className="max-w-[1920px] mx-auto p-4">
                   <div className="max-h-[500px] relative">
                     <div className="absolute w-full h-full text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
-                      <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl font-bold mb-3">
+                      <h1 className="px-4 text-3xl sm:text-4xl md:text-6xl font-bold md:mb-3">
                         The <span>Best Info</span>
                       </h1>
-                      <h1 className="px-4 text-4xl sm:text-5xl md:text-6xl font-bold">
-                        <span className="text-red-600"> Movie and Series </span>{" "}
+                      <h1 className="px-4 text-3xl sm:text-4xl md:text-6xl font-bold">
+                        <span className="text-red-600 mr-2">
+                          Movie and Series
+                        </span>
                         Website
                       </h1>
                     </div>
@@ -149,7 +151,7 @@ function App() {
                   </div>
 
                   {/* Show Movies Section  */}
-                  <section className="mt-10">
+                  <section className="mt-6 md:mt-10">
                     {toggleBtn2 ? (
                       <h1 className="text-xl md:text-2xl mb-5">
                         <span className="font-bold">Showing</span> Movies
@@ -177,7 +179,7 @@ function App() {
                             spaceBetween: 10,
                           },
                           1024: {
-                            slidesPerView: 7,
+                            slidesPerView: 8,
                             spaceBetween: 10,
                           },
                         }}
@@ -189,10 +191,10 @@ function App() {
                       >
                         {showingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
-                            <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
+                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
                               <LazyLoadImage
                                 effect="blur"
-                                className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
+                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
                                 src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                                 alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
@@ -204,7 +206,7 @@ function App() {
                   </section>
 
                   {/* Popular Movies Section  */}
-                  <section className="mt-10">
+                  <section className="mt-6 md:mt-10">
                     <h1 className="text-xl md:text-2xl mb-5">
                       <span className="font-bold">Popular </span>{" "}
                       {toggleBtn2 ? "Movies" : "Series"}
@@ -227,7 +229,7 @@ function App() {
                             spaceBetween: 10,
                           },
                           1024: {
-                            slidesPerView: 7,
+                            slidesPerView: 8,
                             spaceBetween: 10,
                           },
                         }}
@@ -239,10 +241,10 @@ function App() {
                       >
                         {popularMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
-                            <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
+                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
                               <LazyLoadImage
                                 effect="blur"
-                                className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
+                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
                                 src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                                 alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
@@ -254,7 +256,7 @@ function App() {
                   </section>
 
                   {/* Top Rated Movies Section  */}
-                  <section className="mt-10">
+                  <section className="mt-6 md:mt-10">
                     <h1 className="text-xl md:text-2xl mb-5">
                       <span className="font-bold">Top Rated </span>{" "}
                       {toggleBtn2 ? "Movies" : "Series"}
@@ -277,7 +279,7 @@ function App() {
                             spaceBetween: 10,
                           },
                           1024: {
-                            slidesPerView: 7,
+                            slidesPerView: 8,
                             spaceBetween: 10,
                           },
                         }}
@@ -289,10 +291,10 @@ function App() {
                       >
                         {topRatedMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
-                            <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
+                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
                               <LazyLoadImage
                                 effect="blur"
-                                className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
+                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
                                 src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                                 alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
@@ -304,7 +306,7 @@ function App() {
                   </section>
 
                   {/* Upcoming Movies Section  */}
-                  <section className="mt-10">
+                  <section className="mt-6 md:mt-10">
                     <h1 className="text-xl md:text-2xl mb-5">
                       {toggleBtn2 ? (
                         <h1 className="text-xl md:text-2xl mb-5">
@@ -334,7 +336,7 @@ function App() {
                             spaceBetween: 10,
                           },
                           1024: {
-                            slidesPerView: 7,
+                            slidesPerView: 8,
                             spaceBetween: 10,
                           },
                         }}
@@ -346,10 +348,10 @@ function App() {
                       >
                         {upcomingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
-                            <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
+                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
                               <LazyLoadImage
                                 effect="blur"
-                                className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
+                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
                                 src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                                 alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
@@ -361,7 +363,7 @@ function App() {
                   </section>
 
                   {/* Trending Movies/Series Section  */}
-                  <section className="mt-10">
+                  <section className="mt-6 md:mt-10">
                     <h1 className="text-xl md:text-2xl mb-5">
                       <h1 className="text-xl md:text-2xl mb-5">
                         <span className="font-bold ">Trending</span> Today
@@ -385,7 +387,7 @@ function App() {
                             spaceBetween: 10,
                           },
                           1024: {
-                            slidesPerView: 7,
+                            slidesPerView: 8,
                             spaceBetween: 10,
                           },
                         }}
@@ -397,10 +399,10 @@ function App() {
                       >
                         {trendingMovies.results?.map((movies) => (
                           <SwiperSlide key={movies.id}>
-                            <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full w-full">
+                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
                               <LazyLoadImage
                                 effect="blur"
-                                className="max-w-xs transition duration-300 ease-in-out hover:scale-105"
+                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
                                 src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                                 alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
                               />
@@ -414,20 +416,26 @@ function App() {
               }
             />
             {/* ROUTE TRENDING  */}
-            <Route path="/showing" element={<Showing />} />
+            <Route
+              path="/showing"
+              element={<Showing options={options} toggleBtn2={toggleBtn2} />}
+            />
             <Route
               path="/popular"
-              element={
-                <Popular
-                  API_URL_POPULAR={API_URL_POPULAR}
-                  options={options}
-                  toggleBtn2={toggleBtn2}
-                />
-              }
+              element={<Popular options={options} toggleBtn2={toggleBtn2} />}
             />
-            <Route path="/trending" element={<Trending />} />
-            <Route path="/toprated" element={<TopRated />} />
-            <Route path="/upcoming" element={<Upcoming />} />
+            <Route
+              path="/trending"
+              element={<Trending options={options} toggleBtn2={toggleBtn2} />}
+            />
+            <Route
+              path="/toprated"
+              element={<TopRated options={options} toggleBtn2={toggleBtn2} />}
+            />
+            <Route
+              path="/upcoming"
+              element={<Upcoming options={options} toggleBtn2={toggleBtn2} />}
+            />
             <Route path="*" element={<h1>Page Not Found!</h1>} />
           </Routes>
         </Router>

@@ -4,33 +4,32 @@ import BigLoader from "../BigLoader";
 import ReactPaginate from "react-paginate";
 
 const Popular = ({ toggleBtn2, options }) => {
-  const [newPopularMovie, setNewPopularMovie] = useState(null);
+  const [newMovie, setNewMovie] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const ref = useRef(null);
 
   useEffect(() => {
-    const fetchPopular = async (currentPage) => {
+    const fetchMovie = async (currentPage) => {
       try {
         let API_NEW_POPULAR = toggleBtn2
-          ? `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${currentPage}`
-          : `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${currentPage}`;
+          ? `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${currentPage}`
+          : `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${currentPage}`;
         const response = await fetch(API_NEW_POPULAR, options);
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
-        setNewPopularMovie(data);
+        setNewMovie(data);
         setPageCount(Math.ceil(data.total_results / 20));
       } catch (error) {
         console.log("Error", error);
       }
     };
-    fetchPopular();
+    fetchMovie();
   }, []);
 
   const getNextPage = async (currentPage) => {
-    console.log(currentPage);
     let API_NEW_POPULAR = toggleBtn2
-      ? `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${currentPage}`
-      : `https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=${currentPage}`;
+      ? `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${currentPage}`
+      : `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${currentPage}`;
     const response = await fetch(API_NEW_POPULAR, options);
     const data = await response.json();
     return data;
@@ -39,7 +38,7 @@ const Popular = ({ toggleBtn2, options }) => {
   const handlePageClick = async (data) => {
     const currentPage = data.selected + 1;
     const updatePageVar = await getNextPage(currentPage);
-    setNewPopularMovie(updatePageVar);
+    setNewMovie(updatePageVar);
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -51,11 +50,11 @@ const Popular = ({ toggleBtn2, options }) => {
           {toggleBtn2 ? "Movies" : "Series"}
         </h1>
 
-        {newPopularMovie === null && <BigLoader />}
-        {newPopularMovie && (
+        {newMovie === null && <BigLoader />}
+        {newMovie && (
           <>
             <div className="movie-container grid gap-2 md:gap-3 lg:gap-4">
-              <Card newPopularMovie={newPopularMovie} />
+              <Card newMovie={newMovie} />
             </div>
 
             <nav className="Page navigation example mt-5">
@@ -68,10 +67,10 @@ const Popular = ({ toggleBtn2, options }) => {
                 pageRangeDisplayed={3}
                 onPageChange={handlePageClick}
                 containerClassName="list-style-none flex justify-center"
-                previousLinkClassName="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-500"
-                pageLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-950 hover:bg-neutral-100"
-                nextLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-100"
-                breakLinkClassName="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-950 hover:bg-neutral-100"
+                previousLinkClassName="pointer-events-none relative block rounded bg-transparent px-1.5 md:px-3 py-1.5 text-xs md:text-sm text-neutral-500"
+                pageLinkClassName="relative block rounded bg-transparent px-1.5 md:px-3 py-1.5 text-xs md:text-sm text-neutral-950 hover:bg-neutral-100"
+                nextLinkClassName="relative block rounded bg-transparent px-1.5 md:px-3 py-1.5 text-xs md:text-sm text-neutral-600 hover:bg-neutral-100"
+                breakLinkClassName="relative block rounded bg-transparent px-1.5 md:px-3 py-1.5 text-xs md:text-sm text-neutral-950 hover:bg-neutral-100"
                 activeClassName="relative block rounded !bg-black !text-white !shadow-md"
                 activeLinkClassName="relative block rounded !bg-black !text-white"
               />
