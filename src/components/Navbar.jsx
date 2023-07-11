@@ -18,6 +18,14 @@ const Navbar = ({
     console.log(moviesAPI);
   }
   const navigate = useNavigate();
+
+  const loadLogo = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    navigate("/");
+  };
   return (
     <div className="max-w-full lg:max-w-[1920px] mx-auto flex justify-between items-center p-4">
       <div className="flex items-center">
@@ -28,12 +36,12 @@ const Navbar = ({
             onClick={(e) => setToggleBtn(!toggleBtn)}
           />
         </div>
-        <h1
-          className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2 w-fit"
-          onClick={() => navigate("/")}
+        <a
+          className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2 w-fit "
+          onClick={() => loadLogo()}
         >
           Cine<span className="font-bold">movie</span>
-        </h1>
+        </a>
         <div className="hidden lg:flex items-center bg-gray-200 rounded-full p-[3px] text-[14px]">
           <p
             onClick={(e) =>
@@ -87,54 +95,56 @@ const Navbar = ({
             : "fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10 duration-300"
         }
       >
-        <AiOutlineClose
-          size={30}
-          className="absolute right-4 top-4 cursor-pointer h-[20px] w-[20px] md:h-[30px] md:w-[30px]  "
-          onClick={(e) => setToggleBtn(!toggleBtn)}
-        />
+        <div className="flex justify-between w-full items-center">
+          <AiOutlineClose
+            size={30}
+            className="absolute right-4 top-4 cursor-pointer h-[20px] w-[20px] md:h-[30px] md:w-[30px]  "
+            onClick={(e) => setToggleBtn(!toggleBtn)}
+          />
 
-        <h2 className="text-2xl p-4 w-fit" onClick={() => navigate("/")}>
-          Cine<span className="font-bold">movie</span>
-        </h2>
+          <a className="text-2xl p-4 w-fit " onClick={() => loadLogo()}>
+            Cine<span className="font-bold">movie</span>
+          </a>
+        </div>
 
         <nav>
           <ul className="flex flex-col p-4 text-gray-800">
-            <li
-              className="text-xl py-4 block w-fit"
+            <a
+              className="text-xl py-4 block w-fit "
               onClick={() => navigate("/")}
             >
               Home
-            </li>
-            <li
-              className="text-xl py-4 w-fit"
+            </a>
+            <a
+              className="text-xl py-4 w-fit "
               onClick={() => navigate("/showing")}
             >
               Showing
-            </li>
-            <li
-              className="text-xl py-4 w-fit"
+            </a>
+            <a
+              className="text-xl py-4 w-fit "
               onClick={() => navigate("/popular")}
             >
               Popular
-            </li>
-            <li
-              className="text-xl py-4 w-fit"
+            </a>
+            <a
+              className="text-xl py-4 w-fit "
               onClick={() => navigate("/toprated")}
             >
               Top Rated
-            </li>
-            <li
-              className="text-xl py-4 w-fit"
+            </a>
+            <a
+              className="text-xl py-4 w-fit "
               onClick={() => navigate("/upcoming")}
             >
               Upcoming
-            </li>
-            <li
-              className="text-xl py-4 w-fit"
+            </a>
+            <a
+              className="text-xl py-4 w-fit "
               onClick={() => navigate("/trending")}
             >
               Trending
-            </li>
+            </a>
 
             <div className="flex lg:hidden items-center bg-gray-200 rounded-full p-[3px] text-[14px] w-[118px] mt-5">
               <p

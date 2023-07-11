@@ -35,6 +35,10 @@ a:active {
   color: #dc2626 !important;
 }
 
+link:active {
+  color: #dc2626 !important;
+}
+
 body {
   margin: 0;
   padding: 0;
