@@ -18,7 +18,7 @@ const Popular = ({ toggleBtn2, options }) => {
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setNewMovie(data);
-        setPageCount(Math.ceil(data.total_results / 20));
+        setPageCount(Math.ceil(500));
       } catch (error) {
         console.log("Error", error);
       }

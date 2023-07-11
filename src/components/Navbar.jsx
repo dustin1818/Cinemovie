@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 
 const Navbar = ({
@@ -17,8 +17,9 @@ const Navbar = ({
   } else {
     console.log(moviesAPI);
   }
+  const navigate = useNavigate();
   return (
-    <div className="max-w-[1920px] mx-auto flex justify-between items-center p-4">
+    <div className="max-w-full lg:max-w-[1920px] mx-auto flex justify-between items-center p-4">
       <div className="flex items-center">
         <div className="cursor-pointer">
           <AiOutlineMenu
@@ -27,11 +28,12 @@ const Navbar = ({
             onClick={(e) => setToggleBtn(!toggleBtn)}
           />
         </div>
-        <Link to={"/"}>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2">
-            Cine<span className="font-bold">movie</span>
-          </h1>
-        </Link>
+        <h1
+          className="text-2xl sm:text-3xl lg:text-4xl px-2 mr-2 w-fit"
+          onClick={() => navigate("/")}
+        >
+          Cine<span className="font-bold">movie</span>
+        </h1>
         <div className="hidden lg:flex items-center bg-gray-200 rounded-full p-[3px] text-[14px]">
           <p
             onClick={(e) =>
@@ -90,32 +92,49 @@ const Navbar = ({
           className="absolute right-4 top-4 cursor-pointer h-[20px] w-[20px] md:h-[30px] md:w-[30px]  "
           onClick={(e) => setToggleBtn(!toggleBtn)}
         />
-        <Link to={"/"}>
-          <h2 className="text-2xl p-4">
-            Cine<span className="font-bold">movie</span>
-          </h2>
-        </Link>
+
+        <h2 className="text-2xl p-4 w-fit" onClick={() => navigate("/")}>
+          Cine<span className="font-bold">movie</span>
+        </h2>
 
         <nav>
           <ul className="flex flex-col p-4 text-gray-800">
-            <Link to={"/"}>
-              <li className="text-xl py-4"> Home</li>
-            </Link>
-            <Link to={"/showing"}>
-              <li className="text-xl py-4"> Showing</li>
-            </Link>
-            <Link to={"/popular"}>
-              <li className="text-xl py-4"> Popular</li>
-            </Link>
-            <Link to={"/toprated"}>
-              <li className="text-xl py-4">Top Rated</li>
-            </Link>
-            <Link to={"/upcoming"}>
-              <li className="text-xl py-4"> Upcoming</li>
-            </Link>
-            <Link to={"/trending"}>
-              <li className="text-xl py-4"> Trending</li>
-            </Link>
+            <li
+              className="text-xl py-4 block w-fit"
+              onClick={() => navigate("/")}
+            >
+              Home
+            </li>
+            <li
+              className="text-xl py-4 w-fit"
+              onClick={() => navigate("/showing")}
+            >
+              Showing
+            </li>
+            <li
+              className="text-xl py-4 w-fit"
+              onClick={() => navigate("/popular")}
+            >
+              Popular
+            </li>
+            <li
+              className="text-xl py-4 w-fit"
+              onClick={() => navigate("/toprated")}
+            >
+              Top Rated
+            </li>
+            <li
+              className="text-xl py-4 w-fit"
+              onClick={() => navigate("/upcoming")}
+            >
+              Upcoming
+            </li>
+            <li
+              className="text-xl py-4 w-fit"
+              onClick={() => navigate("/trending")}
+            >
+              Trending
+            </li>
 
             <div className="flex lg:hidden items-center bg-gray-200 rounded-full p-[3px] text-[14px] w-[118px] mt-5">
               <p
