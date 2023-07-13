@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Trending from "./components/pages/Trending";
 import Showing from "./components/pages/Showing";
@@ -14,8 +19,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import { Scrollbar } from "swiper/modules";
-import MiniLoader from "./components/MiniLoader";
+// import MiniLoader from "./components/MiniLoader";
 import BigLoader from "./components/BigLoader";
+import MovieDetails from "./components/MovieDetails";
+import ShowingMovies from "./components/home-slider/ShowingMovies";
 
 function App() {
   const [moviesAPI, setMoviesAPI] = useState("movies api");
@@ -32,6 +39,7 @@ function App() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const [movieseriesID, setMovieSeriesID] = useState(0);
 
   // API FOR MOVIES
   let API_URL_NEW = toggleBtn2
@@ -108,6 +116,7 @@ function App() {
     };
     fetchMovies();
   }, [toggleBtn2]);
+  // console.log(showingMovies);
 
   return (
     <div>
@@ -162,46 +171,14 @@ function App() {
                       </h1>
                     )}
                     <div className="flex flex-row w-100 md:w-100">
-                      <Swiper
-                        slidesPerView={1}
-                        spaceBetween={35}
-                        breakpoints={{
-                          320: {
-                            slidesPerView: 4,
-                            spaceBetween: 10,
-                          },
-                          640: {
-                            slidesPerView: 5,
-                            spaceBetween: 10,
-                          },
-                          768: {
-                            slidesPerView: 6,
-                            spaceBetween: 10,
-                          },
-                          1024: {
-                            slidesPerView: 8,
-                            spaceBetween: 10,
-                          },
-                        }}
-                        scrollbar={{
-                          hide: true,
-                        }}
-                        modules={[Scrollbar]}
-                        className="mySwiper"
-                      >
-                        {showingMovies.results?.map((movies) => (
-                          <SwiperSlide key={movies.id}>
-                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
-                              <LazyLoadImage
-                                effect="blur"
-                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                      <ShowingMovies
+                        showingMovies={showingMovies}
+                        setMovieSeriesID={setMovieSeriesID}
+                        LazyLoadImage={LazyLoadImage}
+                        Swiper={Swiper}
+                        SwiperSlide={SwiperSlide}
+                        Scrollbar={Scrollbar}
+                      />
                     </div>
                   </section>
 
@@ -435,6 +412,15 @@ function App() {
             <Route
               path="/upcoming"
               element={<Upcoming options={options} toggleBtn2={toggleBtn2} />}
+            />
+            <Route
+              path="/info/:id"
+              element={
+                <MovieDetails
+                  toggleBtn2={toggleBtn2}
+                  movieseriesID={movieseriesID}
+                />
+              }
             />
             <Route path="*" element={<h1>Page Not Found!</h1>} />
           </Routes>
