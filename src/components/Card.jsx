@@ -2,11 +2,15 @@ import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
-const Card = ({ newMovie }) => {
+const Card = ({ newMovie, goToDetailsPage }) => {
   return (
     <>
       {newMovie.results?.map((movies) => (
-        <div className="flex flex-col rounded" key={movies.id}>
+        <div
+          className="flex flex-col rounded"
+          key={movies.id}
+          onClick={() => goToDetailsPage(movies.id)}
+        >
           <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full rounded border-none ">
             <LazyLoadImage
               effect="blur"

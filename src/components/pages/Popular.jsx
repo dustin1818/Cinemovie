@@ -3,7 +3,7 @@ import Card from "../Card";
 import BigLoader from "../BigLoader";
 import ReactPaginate from "react-paginate";
 
-const Popular = ({ toggleBtn2, options }) => {
+const Popular = ({ toggleBtn2, options, useNavigate, setMovieSeriesID }) => {
   const [newMovie, setNewMovie] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const ref = useRef(null);
@@ -42,6 +42,13 @@ const Popular = ({ toggleBtn2, options }) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const navigate = useNavigate();
+  const goToDetailsPage = (id) => {
+    console.log("movie id:", id);
+    setMovieSeriesID(id);
+    navigate(`/info/${id}`);
+  };
+
   return (
     <>
       <div ref={ref} className="max-w-[1920px] mx-auto p-4 py-8">
@@ -54,7 +61,7 @@ const Popular = ({ toggleBtn2, options }) => {
         {newMovie && (
           <>
             <div className="movie-container grid gap-2 md:gap-3 lg:gap-4">
-              <Card newMovie={newMovie} />
+              <Card newMovie={newMovie} goToDetailsPage={goToDetailsPage} />
             </div>
 
             <nav className="Page navigation example mt-5">

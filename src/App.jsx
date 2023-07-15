@@ -22,7 +22,11 @@ import { Scrollbar } from "swiper/modules";
 // import MiniLoader from "./components/MiniLoader";
 import BigLoader from "./components/BigLoader";
 import MovieDetails from "./components/MovieDetails";
-import ShowingMovies from "./components/home-slider/ShowingMovies";
+import ShowingSlider from "./components/home-slider/ShowingSlider";
+import PopularSlider from "./components/home-slider/PopularSlider";
+import TopRatedSlider from "./components/home-slider/TopRatedSlider";
+import UpcomingSlider from "./components/home-slider/UpcomingSlider";
+import TrendingSlider from "./components/home-slider/TrendingSlider";
 
 function App() {
   const [moviesAPI, setMoviesAPI] = useState("movies api");
@@ -140,8 +144,8 @@ function App() {
               path="/"
               element={
                 <div className="max-w-[1920px] mx-auto p-4">
-                  <div className="max-h-[500px] relative">
-                    <div className="absolute w-full h-full text-gray-200 max-h-[500px] bg-black/40 flex flex-col justify-center">
+                  <div className="max-h-[450px] lg:max-h-[800px] relative">
+                    <div className="absolute w-full h-full text-gray-200 max-h-[450px] lg:max-h-[800px] bg-black/40 flex flex-col justify-center">
                       <h1 className="px-4 text-3xl sm:text-4xl md:text-6xl font-bold md:mb-3">
                         The <span>Best Info</span>
                       </h1>
@@ -153,7 +157,7 @@ function App() {
                       </h1>
                     </div>
                     <img
-                      className="w-full max-h-[500px] object-cover"
+                      className="w-full max-h-[450px] lg:max-h-[800px] object-cover"
                       src="https://images.pexels.com/photos/8263349/pexels-photo-8263349.jpeg"
                       alt="https://images.pexels.com/photos/8263349/pexels-photo-8263349.jpeg"
                     />
@@ -171,13 +175,14 @@ function App() {
                       </h1>
                     )}
                     <div className="flex flex-row w-100 md:w-100">
-                      <ShowingMovies
+                      <ShowingSlider
                         showingMovies={showingMovies}
                         setMovieSeriesID={setMovieSeriesID}
                         LazyLoadImage={LazyLoadImage}
                         Swiper={Swiper}
                         SwiperSlide={SwiperSlide}
                         Scrollbar={Scrollbar}
+                        useNavigate={useNavigate}
                       />
                     </div>
                   </section>
@@ -189,46 +194,15 @@ function App() {
                       {toggleBtn2 ? "Movies" : "Series"}
                     </h1>
                     <div className="flex flex-row w-100 md:w-100">
-                      <Swiper
-                        slidesPerView={1}
-                        spaceBetween={35}
-                        breakpoints={{
-                          320: {
-                            slidesPerView: 4,
-                            spaceBetween: 10,
-                          },
-                          640: {
-                            slidesPerView: 5,
-                            spaceBetween: 10,
-                          },
-                          768: {
-                            slidesPerView: 6,
-                            spaceBetween: 10,
-                          },
-                          1024: {
-                            slidesPerView: 8,
-                            spaceBetween: 10,
-                          },
-                        }}
-                        scrollbar={{
-                          hide: true,
-                        }}
-                        modules={[Scrollbar]}
-                        className="mySwiper"
-                      >
-                        {popularMovies.results?.map((movies) => (
-                          <SwiperSlide key={movies.id}>
-                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
-                              <LazyLoadImage
-                                effect="blur"
-                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                      <PopularSlider
+                        popularMovies={popularMovies}
+                        setMovieSeriesID={setMovieSeriesID}
+                        LazyLoadImage={LazyLoadImage}
+                        Swiper={Swiper}
+                        SwiperSlide={SwiperSlide}
+                        Scrollbar={Scrollbar}
+                        useNavigate={useNavigate}
+                      />
                     </div>
                   </section>
 
@@ -239,46 +213,15 @@ function App() {
                       {toggleBtn2 ? "Movies" : "Series"}
                     </h1>
                     <div className="flex flex-row w-100 md:w-100">
-                      <Swiper
-                        slidesPerView={1}
-                        spaceBetween={35}
-                        breakpoints={{
-                          320: {
-                            slidesPerView: 4,
-                            spaceBetween: 10,
-                          },
-                          640: {
-                            slidesPerView: 5,
-                            spaceBetween: 10,
-                          },
-                          768: {
-                            slidesPerView: 6,
-                            spaceBetween: 10,
-                          },
-                          1024: {
-                            slidesPerView: 8,
-                            spaceBetween: 10,
-                          },
-                        }}
-                        scrollbar={{
-                          hide: true,
-                        }}
-                        modules={[Scrollbar]}
-                        className="mySwiper"
-                      >
-                        {topRatedMovies.results?.map((movies) => (
-                          <SwiperSlide key={movies.id}>
-                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
-                              <LazyLoadImage
-                                effect="blur"
-                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                      <TopRatedSlider
+                        topRatedMovies={topRatedMovies}
+                        setMovieSeriesID={setMovieSeriesID}
+                        LazyLoadImage={LazyLoadImage}
+                        Swiper={Swiper}
+                        SwiperSlide={SwiperSlide}
+                        Scrollbar={Scrollbar}
+                        useNavigate={useNavigate}
+                      />
                     </div>
                   </section>
 
@@ -296,46 +239,15 @@ function App() {
                       )}
                     </h1>
                     <div className="flex flex-row w-100 md:w-100">
-                      <Swiper
-                        slidesPerView={1}
-                        spaceBetween={35}
-                        breakpoints={{
-                          320: {
-                            slidesPerView: 4,
-                            spaceBetween: 10,
-                          },
-                          640: {
-                            slidesPerView: 5,
-                            spaceBetween: 10,
-                          },
-                          768: {
-                            slidesPerView: 6,
-                            spaceBetween: 10,
-                          },
-                          1024: {
-                            slidesPerView: 8,
-                            spaceBetween: 10,
-                          },
-                        }}
-                        scrollbar={{
-                          hide: true,
-                        }}
-                        modules={[Scrollbar]}
-                        className="mySwiper"
-                      >
-                        {upcomingMovies.results?.map((movies) => (
-                          <SwiperSlide key={movies.id}>
-                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
-                              <LazyLoadImage
-                                effect="blur"
-                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                      <UpcomingSlider
+                        upcomingMovies={upcomingMovies}
+                        setMovieSeriesID={setMovieSeriesID}
+                        LazyLoadImage={LazyLoadImage}
+                        Swiper={Swiper}
+                        SwiperSlide={SwiperSlide}
+                        Scrollbar={Scrollbar}
+                        useNavigate={useNavigate}
+                      />
                     </div>
                   </section>
 
@@ -347,46 +259,15 @@ function App() {
                       </h1>
                     </h1>
                     <div className="flex flex-row w-100 md:w-100">
-                      <Swiper
-                        slidesPerView={1}
-                        spaceBetween={35}
-                        breakpoints={{
-                          320: {
-                            slidesPerView: 4,
-                            spaceBetween: 10,
-                          },
-                          640: {
-                            slidesPerView: 5,
-                            spaceBetween: 10,
-                          },
-                          768: {
-                            slidesPerView: 6,
-                            spaceBetween: 10,
-                          },
-                          1024: {
-                            slidesPerView: 8,
-                            spaceBetween: 10,
-                          },
-                        }}
-                        scrollbar={{
-                          hide: true,
-                        }}
-                        modules={[Scrollbar]}
-                        className="mySwiper"
-                      >
-                        {trendingMovies.results?.map((movies) => (
-                          <SwiperSlide key={movies.id}>
-                            <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
-                              <LazyLoadImage
-                                effect="blur"
-                                className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-                                src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                                alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-                              />
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                      <TrendingSlider
+                        trendingMovies={trendingMovies}
+                        setMovieSeriesID={setMovieSeriesID}
+                        LazyLoadImage={LazyLoadImage}
+                        Swiper={Swiper}
+                        SwiperSlide={SwiperSlide}
+                        Scrollbar={Scrollbar}
+                        useNavigate={useNavigate}
+                      />
                     </div>
                   </section>
                 </div>
@@ -395,23 +276,63 @@ function App() {
             {/* ROUTE TRENDING  */}
             <Route
               path="/showing"
-              element={<Showing options={options} toggleBtn2={toggleBtn2} />}
+              element={
+                <Showing
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                  useNavigate={useNavigate}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
+                />
+              }
             />
             <Route
               path="/popular"
-              element={<Popular options={options} toggleBtn2={toggleBtn2} />}
+              element={
+                <Popular
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                  useNavigate={useNavigate}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
+                />
+              }
             />
             <Route
               path="/trending"
-              element={<Trending options={options} toggleBtn2={toggleBtn2} />}
+              element={
+                <Trending
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                  useNavigate={useNavigate}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
+                />
+              }
             />
             <Route
               path="/toprated"
-              element={<TopRated options={options} toggleBtn2={toggleBtn2} />}
+              element={
+                <TopRated
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                  useNavigate={useNavigate}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
+                />
+              }
             />
             <Route
               path="/upcoming"
-              element={<Upcoming options={options} toggleBtn2={toggleBtn2} />}
+              element={
+                <Upcoming
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                  useNavigate={useNavigate}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
+                />
+              }
             />
             <Route
               path="/info/:id"
@@ -419,6 +340,8 @@ function App() {
                 <MovieDetails
                   toggleBtn2={toggleBtn2}
                   movieseriesID={movieseriesID}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
                 />
               }
             />
