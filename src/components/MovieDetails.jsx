@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillPlayCircle, AiFillCaretRight } from "react-icons/ai";
+import Overlay from "./Overlay";
 
 const MovieDetails = ({
   toggleBtn2,
@@ -8,7 +9,11 @@ const MovieDetails = ({
   setMovieSeriesID,
   LazyLoadImage,
 }) => {
+  //state for storing movie information
   const [movieDetails, setMovieDetails] = useState([]);
+
+  //state for overlay
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   // get id of the URL using PARAMS
   const { id } = useParams();
@@ -42,12 +47,6 @@ const MovieDetails = ({
     fetchMovieDetails();
   }, []);
 
-  const playTrailer = () => {
-    console.log("video playing");
-  };
-
-  console.log(movieDetails);
-
   const numFormatter = () => {
     if (movieDetails.revenue > 999 && movieDetails.revenue < 1000000) {
       return (movieDetails.revenue / 1000)?.toFixed(1) + "K"; // convert to K for number from > 1000 < 1 million
@@ -58,16 +57,20 @@ const MovieDetails = ({
     }
   };
 
+  const playTrailer = () => {
+    setIsOverlayVisible(true);
+  };
+
   return (
     <div className="max-w-[1920px] mx-auto">
       <div className="relative  flex flex-col lg:flex-row-reverse bg-black text-[#999]">
-        <div className="movie-overlay relative flex flex-auto after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:block after:content-[''] ">
-          <div className="h-full w-full">
+        <div className="movie-overlay flex flex-auto after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:block after:content-[''] ">
+          <div className="h-full w-full relative">
             <LazyLoadImage
               effect="blur"
               src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
               alt={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
-              className="w-full h-full object-cover object-top md:object-center inline-block"
+              className="w-full h-full object-cover object-top md:object-center inline-block "
             />
 
             <div className="play-icon absolute top-0 right-0 left-0 bottom-0 h-full w-full m-auto flex justify-center items-center">
@@ -76,7 +79,6 @@ const MovieDetails = ({
                 className="md:h-[80px] cursor-pointer z-[1]"
                 color="rgb(220 38 38)"
                 onClick={playTrailer}
-                type="button"
                 role="button"
               />
             </div>
@@ -86,26 +88,38 @@ const MovieDetails = ({
         <div className="description relative flex flex-col p-4 md:justify-center md:after:absolute md:after:left-0 md:after:content-[''] md:after:justify-center md:after:items-center md:after:h-full md:after:w-  md:after:translate-x-[97%]">
           <div className=" max-w-full lg:max-w-[2400px]">
             <h1 className="mb-3 text-white text-2xl font-medium ">
-              {movieDetails?.original_title}
+              {movieDetails?.title}
             </h1>
-            <div className="details flex gap-5 text-sm">
-              <span>{movieDetails.vote_average?.toFixed(2)}/10</span>
-              <span>{numFormatter()} Revenue</span>
-              <span>{new Date(movieDetails?.release_date).getFullYear()}</span>
-              <span>
+            <div className="details flex text-sm">
+              <span className="mr-2">
+                {movieDetails.vote_average?.toFixed(1)}/10
+              </span>
+              <span className="mr-2">{numFormatter()} Revenue</span>
+              <span className="mr-2">
+                {new Date(movieDetails?.release_date).getFullYear()}
+              </span>
+              <span className="mr-2">
                 {Math.floor(movieDetails?.runtime / 60)}h{" "}
                 {movieDetails?.runtime % 60}min
               </span>
+              <span>{movieDetails?.adult === true ? "PG-18" : "PG-13"}</span>
             </div>
             <p className="mt-2 text-white">{movieDetails.overview}</p>
           </div>
 
           <div className="btn-container mr-auto mt-4 flex font-semibold items-center bg-[#dc2626] p-3 w-40 justify-center text-white rounded">
             <AiFillCaretRight size={18} />
-            <button className="text-[15px]">Watch Trailer</button>
+            <button className="text-[15px]" onClick={playTrailer}>
+              Watch Trailer
+            </button>
           </div>
         </div>
       </div>
+      <Overlay
+        isOverlayVisible={isOverlayVisible}
+        setIsOverlayVisible={setIsOverlayVisible}
+        videoId={movieDetails.id}
+      />
     </div>
   );
 };
