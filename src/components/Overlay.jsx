@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
-const Overlay = ({ isOverlayVisible, setIsOverlayVisible, videoId }) => {
+const Overlay = ({
+  isOverlayVisible,
+  setIsOverlayVisible,
+  videoId,
+  toggleBtn2,
+}) => {
   console.log(videoId);
   const [youtubeID, setYoutubeID] = useState("");
 
   useEffect(() => {
     const fetchTrailer = async () => {
       try {
-        const url = `https://api.themoviedb.org/3/movie/${videoId}/videos`;
+        const url =
+          toggleBtn2 === true
+            ? `https://api.themoviedb.org/3/movie/${videoId}/videos`
+            : `https://api.themoviedb.org/3/tv/${videoId}/videos`;
         const options = {
           method: "GET",
           headers: {
@@ -21,9 +29,9 @@ const Overlay = ({ isOverlayVisible, setIsOverlayVisible, videoId }) => {
         const response = await fetch(url, options);
         if (!response.ok) throw new Error("Fetch Videos for youtube failed");
         const data = await response.json();
+        console.log(data);
         data.results?.map((video) => {
           if (video.type === "Trailer" || video.name === "Official Trailer") {
-            console.log(video);
             setYoutubeID(video.key);
           }
         });
@@ -33,7 +41,7 @@ const Overlay = ({ isOverlayVisible, setIsOverlayVisible, videoId }) => {
     };
     fetchTrailer();
   }, [videoId]);
-  // console.log(youtubeID);
+  console.log(toggleBtn2);
   return (
     <>
       {isOverlayVisible && (

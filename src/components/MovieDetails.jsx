@@ -61,6 +61,8 @@ const MovieDetails = ({
     setIsOverlayVisible(true);
   };
 
+  console.log(numFormatter());
+  console.log(movieDetails);
   return (
     <div className="max-w-[1920px] mx-auto">
       <div className="relative  flex flex-col lg:flex-row-reverse bg-black text-[#999]">
@@ -85,33 +87,65 @@ const MovieDetails = ({
           </div>
         </div>
 
-        <div className="description relative flex flex-col p-4 md:justify-center md:after:absolute md:after:left-0 md:after:content-[''] md:after:justify-center md:after:items-center md:after:h-full md:after:w-  md:after:translate-x-[97%]">
+        <div className="description relative flex flex-col p-4 md:justify-center md:after:absolute md:after:left-0 md:after:content-[''] md:after:justify-center md:after:items-center md:after:h-full md:after:w-full md:after:translate-x-[97%]">
           <div className=" max-w-full lg:max-w-[2400px]">
-            <h1 className="mb-3 text-white text-2xl font-medium ">
-              {movieDetails?.title}
-            </h1>
-            <div className="details flex text-sm">
-              <span className="mr-2">
-                {movieDetails.vote_average?.toFixed(1)}/10
-              </span>
-              <span className="mr-2">{numFormatter()} Revenue</span>
-              <span className="mr-2">
-                {new Date(movieDetails?.release_date).getFullYear()}
-              </span>
-              <span className="mr-2">
-                {Math.floor(movieDetails?.runtime / 60)}h{" "}
-                {movieDetails?.runtime % 60}min
-              </span>
-              <span>{movieDetails?.adult === true ? "PG-18" : "PG-13"}</span>
+            {toggleBtn2 === true ? (
+              <>
+                <h1 className="mb-3 text-white text-2xl font-medium ">
+                  {movieDetails?.title}
+                </h1>
+                <div className="details flex text-sm">
+                  <span className="mr-2">
+                    {movieDetails.vote_average?.toFixed(1)}/10
+                  </span>
+                  <span className="mr-2">{numFormatter()}</span>
+                  <span className="mr-2">
+                    {new Date(movieDetails?.release_date).getFullYear()}
+                  </span>
+                  <span className="mr-2">
+                    {Math.floor(movieDetails?.runtime / 60)}h{" "}
+                    {movieDetails?.runtime % 60}min
+                  </span>
+                  <span>
+                    {movieDetails?.adult === true ? "PG-18" : "PG-13"}
+                  </span>
+                </div>
+                <p className="mt-2 text-white">{movieDetails.overview}</p>
+              </>
+            ) : (
+              <>
+                <h1 className="mb-3 text-white text-2xl font-medium ">
+                  {movieDetails?.original_name}
+                </h1>
+                <div className="details flex text-sm">
+                  <span className="mr-2">
+                    {movieDetails.vote_average?.toFixed(1)}/10
+                  </span>
+                  <span className="mr-2">
+                    {" "}
+                    {movieDetails?.number_of_seasons > 1
+                      ? movieDetails?.number_of_seasons + " seasons"
+                      : movieDetails?.number_of_seasons + " season"}
+                  </span>
+                  <span className="mr-2">
+                    {new Date(movieDetails?.first_air_date).getFullYear()}
+                  </span>
+                  <span className="mr-2">
+                    {movieDetails?.number_of_episodes} episodes
+                  </span>
+                  <span>
+                    {movieDetails?.adult === true ? "PG-18" : "PG-13"}
+                  </span>
+                </div>
+                <p className="mt-2 text-white">{movieDetails.overview}</p>
+              </>
+            )}
+            <div className="btn-container mr-auto mt-4 flex font-semibold items-center bg-[#dc2626] p-3 w-40 justify-center text-white rounded">
+              <AiFillCaretRight size={18} />
+              <button className="text-[15px]" onClick={playTrailer}>
+                Watch Trailer
+              </button>
             </div>
-            <p className="mt-2 text-white">{movieDetails.overview}</p>
-          </div>
-
-          <div className="btn-container mr-auto mt-4 flex font-semibold items-center bg-[#dc2626] p-3 w-40 justify-center text-white rounded">
-            <AiFillCaretRight size={18} />
-            <button className="text-[15px]" onClick={playTrailer}>
-              Watch Trailer
-            </button>
           </div>
         </div>
       </div>
@@ -119,6 +153,7 @@ const MovieDetails = ({
         isOverlayVisible={isOverlayVisible}
         setIsOverlayVisible={setIsOverlayVisible}
         videoId={movieDetails.id}
+        toggleBtn2={toggleBtn2}
       />
     </div>
   );
