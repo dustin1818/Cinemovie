@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillPlayCircle, AiFillCaretRight } from "react-icons/ai";
 import Overlay from "./Overlay";
+import Overview from "./Overview";
 
 const MovieDetails = ({
   toggleBtn2,
@@ -14,6 +15,9 @@ const MovieDetails = ({
 
   //state for overlay
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+  //state for movie casts
+  const [movieCast, setMovieCast] = useState(false);
 
   // get id of the URL using PARAMS
   const { id } = useParams();
@@ -45,6 +49,31 @@ const MovieDetails = ({
       }
     }; // end of function
     fetchMovieDetails();
+
+    const fetchMovieCasts = async () => {
+      try {
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOTIyZGQ1NjIwN2QzZmU5ODMyNTI1NDEwZWQ3NDZmMiIsInN1YiI6IjYxMDkxMWExMmY4ZDA5MDA0OGU5ZWQ5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EL9RLiEv0kAhIhDOY0UnQkka_X4fTF5Lqa10DPFJBNg",
+          },
+        };
+        const API_URL = toggleBtn2
+          ? `https://api.themoviedb.org/3/movie/${movieseriesID}/credits`
+          : `https://api.themoviedb.org/3/tv/${movieseriesID}/credits`;
+        const response = await fetch(API_URL, options);
+        if (!response.ok)
+          throw new Error("Fetching data failed for movie details");
+        const data = await response.json();
+        console.log(data);
+        setMovieCast(data);
+      } catch (e) {
+        console.log("Error", e);
+      }
+    }; // end of function
+    fetchMovieCasts();
   }, []);
 
   const numFormatter = () => {
@@ -78,7 +107,7 @@ const MovieDetails = ({
             <div className="play-icon absolute top-0 right-0 left-0 bottom-0 h-full w-full m-auto flex justify-center items-center">
               <AiFillPlayCircle
                 size={50}
-                className="md:h-[80px] cursor-pointer z-[1]"
+                className="md:h-[80px] md:hidden cursor-pointer z-[1]"
                 color="rgb(220 38 38)"
                 onClick={playTrailer}
                 role="button"
@@ -87,7 +116,7 @@ const MovieDetails = ({
           </div>
         </div>
 
-        <div className="description relative flex flex-col p-4 md:justify-center md:after:absolute md:after:left-0 md:after:content-[''] md:after:justify-center md:after:items-center md:after:h-full md:after:w-full md:after:translate-x-[97%]">
+        <div className="description relative flex flex-col p-4 lg:justify-center lg:after:absolute lg:after:left-0 lg:after:content-[''] lg:after:justify-center lg:after:items-center lg:after:h-full lg:after:w-full lg:after:translate-x-[97%] lg:w-[2400px]">
           <div className=" max-w-full lg:max-w-[2400px]">
             {toggleBtn2 === true ? (
               <>
@@ -155,6 +184,8 @@ const MovieDetails = ({
         videoId={movieDetails.id}
         toggleBtn2={toggleBtn2}
       />
+
+      <Overview movieDetails={movieDetails} movieCast={movieCast} />
     </div>
   );
 };
