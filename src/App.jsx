@@ -145,7 +145,7 @@ function App() {
               element={
                 <div className="max-w-[1920px] mx-auto p-4">
                   <div className="max-h-[450px] lg:max-h-[800px] relative">
-                    <div className="absolute w-full h-full text-gray-200 max-h-[450px] lg:max-h-[800px] bg-black/40 flex flex-col justify-center">
+                    <div className="absolute w-full h-full text-gray-200 max-h-[450px] lg:max-h-[800px] bg-black/40 flex flex-col justify-center z-[1]">
                       <h1 className="px-4 text-3xl sm:text-4xl md:text-6xl font-bold md:mb-3">
                         The <span>Best Info</span>
                       </h1>
@@ -156,7 +156,8 @@ function App() {
                         Website
                       </h1>
                     </div>
-                    <img
+                    <LazyLoadImage
+                      effect="blur"
                       className="w-full max-h-[450px] lg:max-h-[800px] object-cover"
                       src="https://images.pexels.com/photos/8263349/pexels-photo-8263349.jpeg"
                       alt="https://images.pexels.com/photos/8263349/pexels-photo-8263349.jpeg"

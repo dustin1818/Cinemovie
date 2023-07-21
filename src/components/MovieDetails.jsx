@@ -67,7 +67,6 @@ const MovieDetails = ({
         if (!response.ok)
           throw new Error("Fetching data failed for movie details");
         const data = await response.json();
-        console.log(data);
         setMovieCast(data);
       } catch (e) {
         console.log("Error", e);
@@ -90,13 +89,11 @@ const MovieDetails = ({
     setIsOverlayVisible(true);
   };
 
-  console.log(numFormatter());
-  console.log(movieDetails);
   return (
     <div className="max-w-[1920px] mx-auto">
-      <div className="relative  flex flex-col lg:flex-row-reverse bg-black text-[#999]">
-        <div className="movie-overlay flex flex-auto after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:block after:content-[''] ">
-          <div className="h-full w-full relative">
+      <div className="flex flex-col lg:flex-row-reverse bg-black text-[#999]">
+        <div className="movie-overlay relative flex flex-auto after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:block after:content-[''] ">
+          <div className="h-full w-full">
             <LazyLoadImage
               effect="blur"
               src={`https://image.tmdb.org/t/p/original/${movieDetails.backdrop_path}`}
@@ -107,7 +104,7 @@ const MovieDetails = ({
             <div className="play-icon absolute top-0 right-0 left-0 bottom-0 h-full w-full m-auto flex justify-center items-center">
               <AiFillPlayCircle
                 size={50}
-                className="md:h-[80px] md:hidden cursor-pointer z-[1]"
+                className="md:h-[80px] lg:hidden cursor-pointer z-[1]"
                 color="rgb(220 38 38)"
                 onClick={playTrailer}
                 role="button"
@@ -116,7 +113,7 @@ const MovieDetails = ({
           </div>
         </div>
 
-        <div className="description relative flex flex-col p-4 lg:justify-center lg:after:absolute lg:after:left-0 lg:after:content-[''] lg:after:justify-center lg:after:items-center lg:after:h-full lg:after:w-full lg:after:translate-x-[97%] lg:w-[2400px]">
+        <div className="description relative flex flex-col p-4 lg:justify-center lg:after:absolute after:left-0 after:right-0 after:bottom-0 after:top-0 after:content-[''] after:justify-center after:items-center after:h-full after:w-full lg:after:translate-x-[97%] lg:w-[2400px]">
           <div className=" max-w-full lg:max-w-[2400px]">
             {toggleBtn2 === true ? (
               <>
@@ -127,7 +124,9 @@ const MovieDetails = ({
                   <span className="mr-2">
                     {movieDetails.vote_average?.toFixed(1)}/10
                   </span>
-                  <span className="mr-2">{numFormatter()}</span>
+                  <span className={numFormatter() === 0 ? null : `mr-2`}>
+                    {numFormatter() === 0 ? null : `$${numFormatter()}`}
+                  </span>
                   <span className="mr-2">
                     {new Date(movieDetails?.release_date).getFullYear()}
                   </span>
@@ -139,7 +138,9 @@ const MovieDetails = ({
                     {movieDetails?.adult === true ? "PG-18" : "PG-13"}
                   </span>
                 </div>
-                <p className="mt-2 text-white">{movieDetails.overview}</p>
+                <p className="mt-2 text-white hidden md:block">
+                  {movieDetails.overview}
+                </p>
               </>
             ) : (
               <>
@@ -169,7 +170,7 @@ const MovieDetails = ({
                 <p className="mt-2 text-white">{movieDetails.overview}</p>
               </>
             )}
-            <div className="btn-container mr-auto mt-4 flex font-semibold items-center bg-[#dc2626] p-3 w-40 justify-center text-white rounded">
+            <div className="btn-container mr-auto mt-4 font-semibold items-center bg-[#dc2626] p-3 w-40 justify-center text-white rounded hidden lg:flex">
               <AiFillCaretRight size={18} />
               <button className="text-[15px]" onClick={playTrailer}>
                 Watch Trailer
@@ -185,7 +186,12 @@ const MovieDetails = ({
         toggleBtn2={toggleBtn2}
       />
 
-      <Overview movieDetails={movieDetails} movieCast={movieCast} />
+      <Overview
+        movieDetails={movieDetails}
+        movieCast={movieCast}
+        numFormatter={numFormatter()}
+        LazyLoadImage={LazyLoadImage}
+      />
     </div>
   );
 };

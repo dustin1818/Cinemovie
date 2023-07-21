@@ -83,7 +83,7 @@ body {
 }
 
 .lazy-load-image-background.blur.lazy-load-image-loaded {
-  width: 100%;
+  width: auto;
   height: 100%;
 }
 

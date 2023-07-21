@@ -7,7 +7,6 @@ const Overlay = ({
   videoId,
   toggleBtn2,
 }) => {
-  console.log(videoId);
   const [youtubeID, setYoutubeID] = useState("");
 
   useEffect(() => {
