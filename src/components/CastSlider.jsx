@@ -1,20 +1,19 @@
 import React from "react";
 
-const TrendingSlider = ({
-  trendingMovies,
-  setMovieSeriesID,
+const CastSlider = ({
+  movieCast,
   LazyLoadImage,
   Swiper,
   SwiperSlide,
   Scrollbar,
-  useNavigate,
+  //   useNavigate,
 }) => {
-  const navigate = useNavigate();
-  const goToDetailsPage = (id) => {
-    console.log("movie id:", id);
-    setMovieSeriesID(id);
-    navigate(`/info/${id}`);
-  };
+  //   const navigate = useNavigate();
+  //   const goToDetailsPage = (id) => {
+  //     console.log("movie id:", id);
+  //     setMovieSeriesID(id);
+  //     navigate(`/info/${id}`);
+  //   };
   return (
     <Swiper
       slidesPerView={1}
@@ -43,15 +42,18 @@ const TrendingSlider = ({
       modules={[Scrollbar]}
       className="mySwiper"
     >
-      {trendingMovies.results?.map((movies) => (
-        <SwiperSlide key={movies.id}>
-          <div className="relative overflow-hidden bg-cover bg-no-repeat rounded-t">
+      {movieCast.cast?.map((cast) => (
+        <SwiperSlide
+          key={cast.id}
+          className={cast.profile_path === null ? "!hidden" : "flex"}
+        >
+          <div className="relative overflow-hidden bg-cover bg-no-repeat">
             <LazyLoadImage
               effect="blur"
               className=" h-auto !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-              src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-              alt={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`}
-              onClick={() => goToDetailsPage(movies.id)}
+              src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+              alt={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+              //   onClick={() => goToDetailsPage(cast.id)}
             />
           </div>
         </SwiperSlide>
@@ -60,4 +62,4 @@ const TrendingSlider = ({
   );
 };
 
-export default TrendingSlider;
+export default CastSlider;

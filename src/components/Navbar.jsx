@@ -139,12 +139,6 @@ const Navbar = ({
             >
               Upcoming
             </a>
-            <a
-              className="text-xl py-4 w-fit "
-              onClick={() => navigate("/trending")}
-            >
-              Trending
-            </a>
 
             <div className="flex lg:hidden items-center bg-gray-200 rounded-full p-[3px] text-[14px] w-[118px] mt-5">
               <p

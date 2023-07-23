@@ -9,6 +9,9 @@ const MovieDetails = ({
   movieseriesID,
   setMovieSeriesID,
   LazyLoadImage,
+  Swiper,
+  SwiperSlide,
+  Scrollbar,
 }) => {
   //state for storing movie information
   const [movieDetails, setMovieDetails] = useState([]);
@@ -67,6 +70,7 @@ const MovieDetails = ({
         if (!response.ok)
           throw new Error("Fetching data failed for movie details");
         const data = await response.json();
+        console.log(data);
         setMovieCast(data);
       } catch (e) {
         console.log("Error", e);
@@ -88,6 +92,8 @@ const MovieDetails = ({
   const playTrailer = () => {
     setIsOverlayVisible(true);
   };
+
+  console.log(movieCast);
 
   return (
     <div className="max-w-[1920px] mx-auto">
@@ -113,7 +119,7 @@ const MovieDetails = ({
           </div>
         </div>
 
-        <div className="description relative flex flex-col p-4 lg:justify-center lg:after:absolute after:left-0 after:right-0 after:bottom-0 after:top-0 after:content-[''] after:justify-center after:items-center after:h-full after:w-full lg:after:translate-x-[97%] lg:w-[2400px]">
+        <div className="description relative flex flex-col p-4 lg:justify-center after:hidden lg:after:absolute after:left-0 after:right-0 after:bottom-0 after:top-0 after:content-[''] after:justify-center after:items-center after:h-full after:w-full lg:after:translate-x-[97%] lg:w-[2400px]">
           <div className=" max-w-full lg:max-w-[2400px]">
             {toggleBtn2 === true ? (
               <>
@@ -145,7 +151,7 @@ const MovieDetails = ({
             ) : (
               <>
                 <h1 className="mb-3 text-white text-2xl font-medium ">
-                  {movieDetails?.original_name}
+                  {movieDetails?.name}
                 </h1>
                 <div className="details flex text-sm">
                   <span className="mr-2">
@@ -191,6 +197,10 @@ const MovieDetails = ({
         movieCast={movieCast}
         numFormatter={numFormatter()}
         LazyLoadImage={LazyLoadImage}
+        toggleBtn2={toggleBtn2}
+        Swiper={Swiper}
+        SwiperSlide={SwiperSlide}
+        Scrollbar={Scrollbar}
       />
     </div>
   );

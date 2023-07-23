@@ -5,7 +5,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Trending from "./components/pages/Trending";
 import Showing from "./components/pages/Showing";
 import Popular from "./components/pages/Popular";
 import TopRated from "./components/pages/TopRated";
@@ -26,7 +25,6 @@ import ShowingSlider from "./components/home-slider/ShowingSlider";
 import PopularSlider from "./components/home-slider/PopularSlider";
 import TopRatedSlider from "./components/home-slider/TopRatedSlider";
 import UpcomingSlider from "./components/home-slider/UpcomingSlider";
-import TrendingSlider from "./components/home-slider/TrendingSlider";
 
 function App() {
   const [moviesAPI, setMoviesAPI] = useState("movies api");
@@ -42,7 +40,6 @@ function App() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [trendingMovies, setTrendingMovies] = useState([]);
   const [movieseriesID, setMovieSeriesID] = useState(0);
 
   // API FOR MOVIES
@@ -62,10 +59,6 @@ function App() {
     ? "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
     : "https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1";
 
-  let API_URL_TRENDING = toggleBtn2
-    ? "https://api.themoviedb.org/3/trending/all/day?language=en-US"
-    : "https://api.themoviedb.org/3/trending/all/day?language=en-US";
-
   let options = {
     method: "GET",
     headers: {
@@ -80,38 +73,31 @@ function App() {
       try {
         setLoading(true);
         const response = await fetch(API_URL_NEW, options);
-        const response2 = await fetch(API_URL_POPULAR, options);
-        const response3 = await fetch(API_URL_TOPRATED, options);
-        const response4 = await fetch(API_URL_UPCOMING, options);
-        const response5 = await fetch(API_URL_TRENDING, options);
         if (!response.ok)
           throw new Error("Network response for New Movies/Series was not ok");
+        const response2 = await fetch(API_URL_POPULAR, options);
         if (!response2.ok)
           throw new Error(
             "Network response for Popular Movies/Series was not ok"
           );
+        const response3 = await fetch(API_URL_TOPRATED, options);
         if (!response3.ok)
           throw new Error(
             "Network response for Top RATED Movies/Series was not ok"
           );
+        const response4 = await fetch(API_URL_UPCOMING, options);
         if (!response4.ok)
           throw new Error(
             "Network response for Upcoming Movies/Series was not ok"
-          );
-        if (!response5.ok)
-          throw new Error(
-            "Network response for Trending Movies/Series was not ok"
           );
         const data = await response.json();
         const data2 = await response2.json();
         const data3 = await response3.json();
         const data4 = await response4.json();
-        const data5 = await response5.json();
         setShowingMovies(data);
         setPopularMovies(data2);
         setTopRatedMovies(data3);
         setUpcomingMovies(data4);
-        setTrendingMovies(data5);
       } catch (e) {
         console.log("Error Try Catch Block: ", e);
       } finally {
@@ -120,7 +106,6 @@ function App() {
     };
     fetchMovies();
   }, [toggleBtn2]);
-  // console.log(showingMovies);
 
   return (
     <div>
@@ -145,7 +130,7 @@ function App() {
               element={
                 <div className="max-w-[1920px] mx-auto p-4">
                   <div className="max-h-[450px] lg:max-h-[800px] relative">
-                    <div className="absolute w-full h-full text-gray-200 max-h-[450px] lg:max-h-[800px] bg-black/40 flex flex-col justify-center z-[1]">
+                    <div className="absolute w-full h-[97%] md:h[99%] xl:h-full text-gray-200 max-h-[450px] lg:max-h-[800px] bg-black/40 flex flex-col justify-center z-[1]">
                       <h1 className="px-4 text-3xl sm:text-4xl md:text-6xl font-bold md:mb-3">
                         The <span>Best Info</span>
                       </h1>
@@ -251,30 +236,10 @@ function App() {
                       />
                     </div>
                   </section>
-
-                  {/* Trending Movies/Series Section  */}
-                  <section className="mt-6 md:mt-10">
-                    <h1 className="text-xl md:text-2xl mb-5">
-                      <h1 className="text-xl md:text-2xl mb-5">
-                        <span className="font-bold ">Trending</span> Today
-                      </h1>
-                    </h1>
-                    <div className="flex flex-row w-100 md:w-100">
-                      <TrendingSlider
-                        trendingMovies={trendingMovies}
-                        setMovieSeriesID={setMovieSeriesID}
-                        LazyLoadImage={LazyLoadImage}
-                        Swiper={Swiper}
-                        SwiperSlide={SwiperSlide}
-                        Scrollbar={Scrollbar}
-                        useNavigate={useNavigate}
-                      />
-                    </div>
-                  </section>
                 </div>
               }
             />
-            {/* ROUTE TRENDING  */}
+            {/* ROUTES  */}
             <Route
               path="/showing"
               element={
@@ -291,18 +256,6 @@ function App() {
               path="/popular"
               element={
                 <Popular
-                  options={options}
-                  toggleBtn2={toggleBtn2}
-                  useNavigate={useNavigate}
-                  setMovieSeriesID={setMovieSeriesID}
-                  LazyLoadImage={LazyLoadImage}
-                />
-              }
-            />
-            <Route
-              path="/trending"
-              element={
-                <Trending
                   options={options}
                   toggleBtn2={toggleBtn2}
                   useNavigate={useNavigate}
@@ -343,6 +296,9 @@ function App() {
                   movieseriesID={movieseriesID}
                   setMovieSeriesID={setMovieSeriesID}
                   LazyLoadImage={LazyLoadImage}
+                  Swiper={Swiper}
+                  SwiperSlide={SwiperSlide}
+                  Scrollbar={Scrollbar}
                 />
               }
             />
