@@ -1,7 +1,7 @@
 import React from "react";
 
-const CastSlider = ({
-  movieCast,
+const RecommendationSlider = ({
+  recommendations,
   LazyLoadImage,
   Swiper,
   SwiperSlide,
@@ -14,6 +14,7 @@ const CastSlider = ({
   //     setMovieSeriesID(id);
   //     navigate(`/info/${id}`);
   //   };
+  console.log(recommendations);
   return (
     <Swiper
       slidesPerView={1}
@@ -42,18 +43,18 @@ const CastSlider = ({
       modules={[Scrollbar]}
       className="mySwiper"
     >
-      {movieCast.cast?.map((cast) => (
+      {recommendations.results?.map((recommendation) => (
         <SwiperSlide
-          key={cast.id}
-          className={cast.profile_path === null ? "!hidden" : "flex"}
+          key={recommendation.id}
+          className={recommendation.poster_path === null ? "!hidden" : "flex"}
         >
           <div className="relative overflow-hidden bg-cover bg-no-repeat">
             <LazyLoadImage
               effect="blur"
               className="!h-[130px] md:!h-[200px] lg:!h-[242px] md:!w-[182px] !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-              src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-              alt={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-              //   onClick={() => goToDetailsPage(cast.id)}
+              src={`https://image.tmdb.org/t/p/original/${recommendation.poster_path}`}
+              alt={`https://image.tmdb.org/t/p/original/${recommendation.poster_path}`}
+              //   onClick={() => goToDetailsPage(recommendation.id)}
             />
           </div>
         </SwiperSlide>
@@ -62,4 +63,4 @@ const CastSlider = ({
   );
 };
 
-export default CastSlider;
+export default RecommendationSlider;

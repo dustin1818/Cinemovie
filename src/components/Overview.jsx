@@ -1,5 +1,6 @@
 import React from "react";
 import CastSlider from "./CastSlider";
+import RecommendationSlider from "./RecommendationSlider";
 
 const Overview = ({
   movieDetails,
@@ -10,6 +11,7 @@ const Overview = ({
   Swiper,
   SwiperSlide,
   Scrollbar,
+  recommendations,
 }) => {
   const fetchMovieDirector = () => {
     let director = "";
@@ -40,7 +42,7 @@ const Overview = ({
     }
   };
   return (
-    <div className="bg-zinc-900 text-white p-4 py-10">
+    <div className="bg-zinc-900 text-white p-4 py-10 pb-0">
       <div className="flex justify-center text-center w-auto gap-10 ">
         <h3 className="uppercase font-medium">Overview</h3>
         <h3 className="uppercase font-medium">Videos</h3>
@@ -61,70 +63,76 @@ const Overview = ({
               </div>
 
               <div className="flex flex-col lg:ml-10 w-full lg:w-[1050px]">
-                <p className="mb-2 text-2xl md:text-3xl font-medium">
+                <p className="mb-2 text-xl md:text-2xl font-medium">
                   Storyline
                 </p>
                 <p className="mb-5">{movieDetails.overview}</p>
 
                 <div className="overview-details-info mt-4 flex flex-col gap-2">
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Released:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {new Date(movieDetails?.release_date).getFullYear()}
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Runtime:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       {Math.floor(movieDetails?.runtime / 60)}h{" "}
                       {movieDetails?.runtime % 60 > 60
                         ? `${movieDetails?.runtime % 60} min`
                         : `${movieDetails?.runtime % 60} sec`}
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Director:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{fetchMovieDirector()}</p>
                     </div>
                   </div>
                   <div
-                    className={numFormatter === 0 ? "hidden" : "flex flex-wrap"}
+                    className={
+                      numFormatter === 0
+                        ? "hidden"
+                        : "flex mr-4 md:mr-0 flex-wrap md:justify-between"
+                    }
                   >
-                    <div className="w-[20%] md:w-[12%]">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Revenue:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{numFormatter === 0 ? null : `$${numFormatter}`}</p>
                     </div>
                   </div>
                   <div
                     className={
-                      numFormatter2 === 0 ? "hidden" : "flex flex-wrap"
+                      numFormatter2 === 0
+                        ? "hidden"
+                        : "flex mr-4 md:mr-0 flex-wrap md:justify-between"
                     }
                   >
-                    <div className="w-[20%] md:w-[12%]">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Budget:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {numFormatter2 === 0 ? null : `$${numFormatter2()}`}
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Genre:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {movieDetails.genres
                           ?.map((genre) => `${genre.name}`)
@@ -132,19 +140,19 @@ const Overview = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Status:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{movieDetails.status}</p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Language:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {movieDetails.spoken_languages
                           ?.map((language) => `${language.english_name}`)
@@ -152,11 +160,11 @@ const Overview = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Production:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {" "}
                         {movieDetails.production_companies
@@ -180,25 +188,27 @@ const Overview = ({
               </div>
 
               <div className="flex flex-col lg:ml-10 w-full lg:w-[1050px]">
-                <p className="mb-2 text-3xl font-medium">Storyline</p>
+                <p className="mb-2 text-xl md:text-2xl font-medium">
+                  Storyline
+                </p>
                 <p className="mb-5">{movieDetails.overview}</p>
 
                 <div className="overview-details-info mt-4 flex flex-col gap-2">
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Released:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {new Date(movieDetails?.first_air_date).getFullYear()}
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Runtime:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto  md:w-[88%]">
                       {Math.floor(movieDetails?.episode_run_time / 60) === 0
                         ? null
                         : `${Math.floor(movieDetails?.episode_run_time / 60)}h`}
@@ -207,43 +217,43 @@ const Overview = ({
                         : `${movieDetails?.episode_run_time % 60} sec`}
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Director:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{fetchMovieDirector()}</p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>
                         {movieDetails.number_of_seasons > 1
                           ? "Seasons"
                           : "Season"}
                       </p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{movieDetails.number_of_seasons}</p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>
                         {movieDetails.number_of_episodes > 1
                           ? "Episodes"
                           : "Episode"}
                       </p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{movieDetails.number_of_episodes}</p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Genre:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {movieDetails.genres
                           ?.map((genre) => `${genre.name}`)
@@ -251,19 +261,19 @@ const Overview = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Status:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>{movieDetails.status}</p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Language:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {movieDetails.spoken_languages
                           ?.map((language) => `${language.english_name}`)
@@ -271,11 +281,11 @@ const Overview = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap">
-                    <div className="w-[20%] md:w-[12%]">
+                  <div className="flex flex-wrap md:justify-between">
+                    <div className="w-auto mr-4 md:mr-0 md:w-[12%]">
                       <p>Production:</p>
                     </div>
-                    <div className="w-[71%] md:w-[78%]">
+                    <div className="w-auto md:w-[88%]">
                       <p>
                         {" "}
                         {movieDetails.production_companies
@@ -289,15 +299,33 @@ const Overview = ({
             </div>
           )}
 
-          <h2 className=" text-xl my-5 font-medium">Cast</h2>
-          <CastSlider
-            movieCast={movieCast}
-            Swiper={Swiper}
-            SwiperSlide={SwiperSlide}
-            Scrollbar={Scrollbar}
-            toggleBtn2={toggleBtn2}
-            LazyLoadImage={LazyLoadImage}
-          />
+          <div className={movieCast.cast?.length === 0 ? "!hidden" : "my-3"}>
+            <h2 className="text-xl my-3 font-medium">Cast</h2>
+            <CastSlider
+              movieCast={movieCast}
+              Swiper={Swiper}
+              SwiperSlide={SwiperSlide}
+              Scrollbar={Scrollbar}
+              toggleBtn2={toggleBtn2}
+              LazyLoadImage={LazyLoadImage}
+            />
+          </div>
+
+          <div
+            className={
+              recommendations.results?.length === 0 ? "!hidden" : "my-3"
+            }
+          >
+            <h2 className=" text-xl my-3 font-medium">More Like This</h2>
+            <RecommendationSlider
+              recommendations={recommendations}
+              Swiper={Swiper}
+              SwiperSlide={SwiperSlide}
+              Scrollbar={Scrollbar}
+              toggleBtn2={toggleBtn2}
+              LazyLoadImage={LazyLoadImage}
+            />
+          </div>
         </div>
       </div>
     </div>

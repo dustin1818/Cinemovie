@@ -20,7 +20,10 @@ const MovieDetails = ({
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   //state for movie casts
-  const [movieCast, setMovieCast] = useState(false);
+  const [movieCast, setMovieCast] = useState([]);
+
+  //state for movie recommendations
+  const [recommendations, setRecommendations] = useState([]);
 
   // get id of the URL using PARAMS
   const { id } = useParams();
@@ -68,15 +71,38 @@ const MovieDetails = ({
           : `https://api.themoviedb.org/3/tv/${movieseriesID}/credits`;
         const response = await fetch(API_URL, options);
         if (!response.ok)
-          throw new Error("Fetching data failed for movie details");
+          throw new Error("Fetching data failed for movie casts");
         const data = await response.json();
-        console.log(data);
         setMovieCast(data);
       } catch (e) {
         console.log("Error", e);
       }
     }; // end of function
     fetchMovieCasts();
+
+    const fetchMovieRecommendations = async () => {
+      try {
+        const options = {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOTIyZGQ1NjIwN2QzZmU5ODMyNTI1NDEwZWQ3NDZmMiIsInN1YiI6IjYxMDkxMWExMmY4ZDA5MDA0OGU5ZWQ5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EL9RLiEv0kAhIhDOY0UnQkka_X4fTF5Lqa10DPFJBNg",
+          },
+        };
+        const API_URL = toggleBtn2
+          ? `https://api.themoviedb.org/3/movie/${movieseriesID}/recommendations`
+          : `https://api.themoviedb.org/3/tv/${movieseriesID}/recommendations`;
+        const response = await fetch(API_URL, options);
+        if (!response.ok)
+          throw new Error("Fetching data failed for movie recommendations");
+        const data = await response.json();
+        setRecommendations(data);
+      } catch (e) {
+        console.log("Error", e);
+      }
+    };
+    fetchMovieRecommendations();
   }, []);
 
   const numFormatter = () => {
@@ -92,8 +118,6 @@ const MovieDetails = ({
   const playTrailer = () => {
     setIsOverlayVisible(true);
   };
-
-  console.log(movieCast);
 
   return (
     <div className="max-w-[1920px] mx-auto">
@@ -123,7 +147,7 @@ const MovieDetails = ({
           <div className=" max-w-full lg:max-w-[2400px]">
             {toggleBtn2 === true ? (
               <>
-                <h1 className="mb-3 text-white text-2xl font-medium ">
+                <h1 className="mb-3 text-white text-xl md:text-2xl  font-medium ">
                   {movieDetails?.title}
                 </h1>
                 <div className="details flex text-sm">
@@ -201,6 +225,7 @@ const MovieDetails = ({
         Swiper={Swiper}
         SwiperSlide={SwiperSlide}
         Scrollbar={Scrollbar}
+        recommendations={recommendations}
       />
     </div>
   );
