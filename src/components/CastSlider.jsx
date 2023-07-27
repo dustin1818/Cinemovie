@@ -6,14 +6,13 @@ const CastSlider = ({
   Swiper,
   SwiperSlide,
   Scrollbar,
-  //   useNavigate,
+  useNavigate,
 }) => {
-  //   const navigate = useNavigate();
-  //   const goToDetailsPage = (id) => {
-  //     console.log("movie id:", id);
-  //     setMovieSeriesID(id);
-  //     navigate(`/info/${id}`);
-  //   };
+  const navigate = useNavigate();
+  const goToActorPage = (id) => {
+    console.log("cast id:", id);
+    navigate(`/person/${id}`);
+  };
   return (
     <Swiper
       slidesPerView={1}
@@ -53,7 +52,7 @@ const CastSlider = ({
               className="!h-[130px] md:!h-[200px] lg:!h-[242px] md:!w-[182px] !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
               src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
               alt={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
-              //   onClick={() => goToDetailsPage(cast.id)}
+              onClick={() => goToActorPage(cast.id)}
             />
           </div>
         </SwiperSlide>

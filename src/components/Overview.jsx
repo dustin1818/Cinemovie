@@ -12,6 +12,8 @@ const Overview = ({
   SwiperSlide,
   Scrollbar,
   recommendations,
+  setMovieSeriesID,
+  useNavigate,
 }) => {
   const fetchMovieDirector = () => {
     let director = "";
@@ -303,11 +305,11 @@ const Overview = ({
             <h2 className="text-xl my-3 font-medium">Cast</h2>
             <CastSlider
               movieCast={movieCast}
+              LazyLoadImage={LazyLoadImage}
+              useNavigate={useNavigate}
               Swiper={Swiper}
               SwiperSlide={SwiperSlide}
               Scrollbar={Scrollbar}
-              toggleBtn2={toggleBtn2}
-              LazyLoadImage={LazyLoadImage}
             />
           </div>
 
@@ -324,6 +326,7 @@ const Overview = ({
               Scrollbar={Scrollbar}
               toggleBtn2={toggleBtn2}
               LazyLoadImage={LazyLoadImage}
+              setMovieSeriesID={setMovieSeriesID}
             />
           </div>
         </div>

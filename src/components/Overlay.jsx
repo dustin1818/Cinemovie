@@ -47,8 +47,8 @@ const Overlay = ({
         <div
           className={
             isOverlayVisible === true
-              ? "overlay flex flex-col justify-center open min-h-screen bg-black fixed top-0 left-0 right-0 bottom-0 w-full z-[1] p-[20px] md:p-[120px]"
-              : "overlay min-h-screen flex flex-col justify-center bg-black fixed top-0 left-0 right-0 bottom-0 w-full z-[1] p-[20px] md:p-[120px]"
+              ? "overlay flex flex-col justify-center open min-h-screen bg-black fixed top-0 left-0 right-0 bottom-0 w-full z-[10] p-[20px] md:p-[120px]"
+              : "overlay min-h-screen flex flex-col justify-center bg-black fixed top-0 left-0 right-0 bottom-0 w-full z-[10] p-[20px] md:p-[120px]"
           }
         >
           <AiOutlineClose

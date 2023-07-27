@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  useParams,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Showing from "./components/pages/Showing";
@@ -25,6 +26,7 @@ import ShowingSlider from "./components/home-slider/ShowingSlider";
 import PopularSlider from "./components/home-slider/PopularSlider";
 import TopRatedSlider from "./components/home-slider/TopRatedSlider";
 import UpcomingSlider from "./components/home-slider/UpcomingSlider";
+import Cast from "./components/Cast";
 
 function App() {
   const [moviesAPI, setMoviesAPI] = useState("movies api");
@@ -40,6 +42,7 @@ function App() {
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
+
   const [movieseriesID, setMovieSeriesID] = useState(0);
 
   // API FOR MOVIES
@@ -299,6 +302,16 @@ function App() {
                   Swiper={Swiper}
                   SwiperSlide={SwiperSlide}
                   Scrollbar={Scrollbar}
+                />
+              }
+            />
+            <Route
+              path="/person/:id"
+              element={
+                <Cast
+                  toggleBtn2={toggleBtn2}
+                  LazyLoadImage={LazyLoadImage}
+                  useParams={useParams}
                 />
               }
             />

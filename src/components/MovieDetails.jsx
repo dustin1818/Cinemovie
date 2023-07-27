@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AiFillPlayCircle, AiFillCaretRight } from "react-icons/ai";
 import Overlay from "./Overlay";
 import Overview from "./Overview";
@@ -30,6 +30,10 @@ const MovieDetails = ({
   localStorage.setItem("saveMovieID", JSON.parse(id));
   const getID = localStorage.getItem("saveMovieID");
   setMovieSeriesID(getID);
+
+  const playTrailer = () => {
+    setIsOverlayVisible(true);
+  };
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -103,7 +107,7 @@ const MovieDetails = ({
       }
     };
     fetchMovieRecommendations();
-  }, []);
+  }, [movieseriesID]);
 
   const numFormatter = () => {
     if (movieDetails.revenue > 999 && movieDetails.revenue < 1000000) {
@@ -113,10 +117,6 @@ const MovieDetails = ({
     } else if (movieDetails.revenue < 900) {
       return movieDetails.revenue; // if value < 1000, nothing to do
     }
-  };
-
-  const playTrailer = () => {
-    setIsOverlayVisible(true);
   };
 
   return (
@@ -214,6 +214,7 @@ const MovieDetails = ({
         setIsOverlayVisible={setIsOverlayVisible}
         videoId={movieDetails.id}
         toggleBtn2={toggleBtn2}
+        setMovieSeriesID={setMovieSeriesID}
       />
 
       <Overview
@@ -226,6 +227,8 @@ const MovieDetails = ({
         SwiperSlide={SwiperSlide}
         Scrollbar={Scrollbar}
         recommendations={recommendations}
+        setMovieSeriesID={setMovieSeriesID}
+        useNavigate={useNavigate}
       />
     </div>
   );

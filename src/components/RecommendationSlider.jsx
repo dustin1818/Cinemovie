@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const RecommendationSlider = ({
   recommendations,
@@ -6,14 +6,13 @@ const RecommendationSlider = ({
   Swiper,
   SwiperSlide,
   Scrollbar,
-  //   useNavigate,
+  setMovieSeriesID,
 }) => {
-  //   const navigate = useNavigate();
-  //   const goToDetailsPage = (id) => {
-  //     console.log("movie id:", id);
-  //     setMovieSeriesID(id);
-  //     navigate(`/info/${id}`);
-  //   };
+  const goToDetailsPage = (id) => {
+    console.log("movie id:", id);
+    setMovieSeriesID(id);
+  };
+
   console.log(recommendations);
   return (
     <Swiper
@@ -54,7 +53,7 @@ const RecommendationSlider = ({
               className="!h-[130px] md:!h-[200px] lg:!h-[242px] md:!w-[182px] !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
               src={`https://image.tmdb.org/t/p/original/${recommendation.poster_path}`}
               alt={`https://image.tmdb.org/t/p/original/${recommendation.poster_path}`}
-              //   onClick={() => goToDetailsPage(recommendation.id)}
+              onClick={() => goToDetailsPage(recommendation.id)}
             />
           </div>
         </SwiperSlide>
