@@ -32,7 +32,53 @@ const Cast = ({ toggleBtn2, LazyLoadImage, useParams }) => {
     fetchActorInfo();
   }, []);
   console.log(actorInfo);
-  return <div>Cast</div>;
+
+  const dateBorn = new Date(actorInfo?.birthday);
+  const today = new Date();
+  const ageActor = today.getFullYear() - dateBorn.getFullYear();
+
+  const formattedDate = dateBorn.toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  return (
+    <div className="max-w-[1920px] mx-auto p-4 py-8 bg-zinc-900 text-white">
+      <h2 className="font-medium md:text-xl mb-4">{actorInfo?.name}</h2>
+      <div className="block">
+        <div className="img-container inline-block float-left w-[40%] max-w-[200px] mr-3 mb-1 ">
+          <LazyLoadImage
+            effect="blur"
+            src={`https://image.tmdb.org/t/p/original/${actorInfo.profile_path}`}
+            alt={`https://image.tmdb.org/t/p/original/${actorInfo.profile_path}`}
+            className="w-full h-full object-cover object-top inline-block "
+          />
+        </div>
+
+        <div className="desc-container">
+          <p className=" whitespace-pre-line text-[14px]">
+            {actorInfo?.biography}
+          </p>
+        </div>
+
+        <div className="block mt-5">
+          <div className="flex text-[14px]">
+            <p className="flex-[1] max-w-[90px] mr-4">Known For</p>
+            <p className="flex-[2]">{actorInfo?.known_for_department}</p>
+          </div>
+          <div className="flex text-[14px] mt-2">
+            <p className="flex-[1] max-w-[90px] mr-4">Born</p>
+            <p className="flex-[2]">{`${formattedDate} (age ${ageActor})`}</p>
+          </div>
+          <div className="flex text-[14px] mt-2">
+            <p className="flex-[1] max-w-[90px] mr-4">Birthplace</p>
+            <p className="flex-[2]">{actorInfo?.place_of_birth}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Cast;
