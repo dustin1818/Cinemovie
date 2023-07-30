@@ -28,7 +28,6 @@ const Overlay = ({
         const response = await fetch(url, options);
         if (!response.ok) throw new Error("Fetch Videos for youtube failed");
         const data = await response.json();
-        console.log(data);
         data.results?.map((video) => {
           if (video.type === "Trailer" || video.name === "Official Trailer") {
             setYoutubeID(video.key);
@@ -40,7 +39,6 @@ const Overlay = ({
     };
     fetchTrailer();
   }, [videoId]);
-  console.log(toggleBtn2);
   return (
     <>
       {isOverlayVisible && (

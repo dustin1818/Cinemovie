@@ -10,7 +10,6 @@ const CastSlider = ({
 }) => {
   const navigate = useNavigate();
   const goToActorPage = (id) => {
-    console.log("cast id:", id);
     navigate(`/person/${id}`);
   };
   return (

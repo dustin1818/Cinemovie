@@ -14,6 +14,7 @@ const Overview = ({
   recommendations,
   setMovieSeriesID,
   useNavigate,
+  topElement,
 }) => {
   const fetchMovieDirector = () => {
     let director = "";
@@ -32,7 +33,6 @@ const Overview = ({
     }
     return director;
   };
-  console.log(movieDetails);
 
   const numFormatter2 = () => {
     if (movieDetails.budget > 999 && movieDetails.budget < 1000000) {
@@ -43,6 +43,7 @@ const Overview = ({
       return movieDetails.budget; // if value < 1000, nothing to do
     }
   };
+
   return (
     <div className="bg-zinc-900 text-white p-4 py-10 pb-0">
       <div className="flex justify-center text-center w-auto gap-10 ">
@@ -327,6 +328,7 @@ const Overview = ({
               toggleBtn2={toggleBtn2}
               LazyLoadImage={LazyLoadImage}
               setMovieSeriesID={setMovieSeriesID}
+              topElement={topElement}
             />
           </div>
         </div>

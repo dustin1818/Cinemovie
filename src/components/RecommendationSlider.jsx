@@ -7,13 +7,13 @@ const RecommendationSlider = ({
   SwiperSlide,
   Scrollbar,
   setMovieSeriesID,
+  topElement,
 }) => {
   const goToDetailsPage = (id) => {
-    console.log("movie id:", id);
     setMovieSeriesID(id);
+    console.log(topElement);
+    topElement.current.scrollIntoView({ behaviour: "smooth" });
   };
-
-  console.log(recommendations);
   return (
     <Swiper
       slidesPerView={1}

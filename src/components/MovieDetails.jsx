@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AiFillPlayCircle, AiFillCaretRight } from "react-icons/ai";
 import Overlay from "./Overlay";
@@ -31,9 +31,14 @@ const MovieDetails = ({
   const getID = localStorage.getItem("saveMovieID");
   setMovieSeriesID(getID);
 
+  //state for Reference Value
+  const [topElement, setTopElement] = useState(null);
+
   const playTrailer = () => {
     setIsOverlayVisible(true);
   };
+
+  const ref = useRef();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -107,6 +112,8 @@ const MovieDetails = ({
       }
     };
     fetchMovieRecommendations();
+
+    setTopElement(ref);
   }, [movieseriesID]);
 
   const numFormatter = () => {
@@ -120,7 +127,7 @@ const MovieDetails = ({
   };
 
   return (
-    <div className="max-w-[1920px] mx-auto">
+    <div ref={ref} className="max-w-[1920px] mx-auto">
       <div className="flex flex-col lg:flex-row-reverse bg-black text-[#999]">
         <div className="movie-overlay relative flex flex-auto after:absolute after:top-0 after:right-0 after:left-0 after:bottom-0 after:block after:content-[''] ">
           <div className="h-full w-full">
@@ -229,6 +236,7 @@ const MovieDetails = ({
         recommendations={recommendations}
         setMovieSeriesID={setMovieSeriesID}
         useNavigate={useNavigate}
+        topElement={topElement}
       />
     </div>
   );

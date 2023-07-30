@@ -26,13 +26,6 @@ const Showing = ({ toggleBtn2, options, useNavigate, setMovieSeriesID }) => {
     fetchMovie();
   }, []);
 
-  const navigate = useNavigate();
-  const goToDetailsPage = (id) => {
-    console.log("movie id:", id);
-    setMovieSeriesID(id);
-    navigate(`/info/${id}`);
-  };
-
   const getNextPage = async (currentPage) => {
     let API_NEW_SHOWING = toggleBtn2
       ? `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${currentPage}`
