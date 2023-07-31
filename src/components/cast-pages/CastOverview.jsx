@@ -9,7 +9,6 @@ const CastOverview = ({
   const [actorShows, setActorShows] = useState([]);
 
   const goToDetailsPage = (id) => {
-    console.log("movie id:", id);
     setMovieSeriesID(id);
     navigate(`/info/${id}`);
   };
@@ -37,7 +36,7 @@ const CastOverview = ({
     fetchShows();
   }, [actorInfo]);
 
-  console.log(actorInfo);
+  console.log(actorShows);
 
   return (
     <div className="bg-zinc-900 text-white p-4 py-10 pb-0">
@@ -69,7 +68,7 @@ const CastOverview = ({
               </div>
 
               <div className="description-name mt-3 text-[14px]">
-                <p className="font-medium ">{shows.original_title}</p>
+                <p className="font-medium ">{shows.title}</p>
                 <p className=" text-zinc-300">
                   {Math.floor(shows.vote_average * 10) / 10} / 10
                 </p>

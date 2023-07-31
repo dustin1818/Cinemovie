@@ -44,7 +44,6 @@ const Popular = ({ toggleBtn2, options, useNavigate, setMovieSeriesID }) => {
 
   const navigate = useNavigate();
   const goToDetailsPage = (id) => {
-    console.log("movie id:", id);
     setMovieSeriesID(id);
     navigate(`/info/${id}`);
   };

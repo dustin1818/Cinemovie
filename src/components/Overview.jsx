@@ -59,7 +59,11 @@ const Overview = ({
               <div className="hidden lg:flex">
                 <LazyLoadImage
                   effect="blur"
-                  src={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
+                  src={`${
+                    movieDetails.poster_path === null
+                      ? `https://kennyleeholmes.com/wp-content/uploads/2017/09/no-image-available.png`
+                      : `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+                  }`}
                   alt={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
                   className="w-[300px] h-full object-contain object-top lg:object-top inline-block "
                 />
@@ -303,7 +307,15 @@ const Overview = ({
           )}
 
           <div className={movieCast.cast?.length === 0 ? "!hidden" : "my-3"}>
-            <h2 className="text-xl my-3 font-medium">Cast</h2>
+            <h2
+              className={
+                movieCast.cast?.length === 0
+                  ? "!hidden"
+                  : "text-xl my-3 font-medium"
+              }
+            >
+              Cast
+            </h2>
             <CastSlider
               movieCast={movieCast}
               LazyLoadImage={LazyLoadImage}

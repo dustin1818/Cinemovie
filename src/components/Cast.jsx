@@ -40,7 +40,6 @@ const Cast = ({
 
     fetchActorInfo();
   }, []);
-  console.log(actorInfo);
 
   const dateBorn = new Date(actorInfo?.birthday);
   const today = new Date();
@@ -56,8 +55,8 @@ const Cast = ({
     <div className="max-w-[1920px] mx-auto p-4 py-8 bg-zinc-900 text-white h-full">
       <h2 className="font-medium md:text-xl mb-4">{actorInfo?.name}</h2>
       <div className="flex flex-col">
-        <div className="block lg:flex">
-          <div className="img-container inline-block float-left w-[40%] max-w-[200px] mr-3 mb-1 ">
+        <div className="block lg:flex lg:flex-col">
+          <div className="img-container inline-block float-left w-[40%] max-w-[200px] mr-3 mb-1 lg:mb-5">
             <LazyLoadImage
               effect="blur"
               src={`https://image.tmdb.org/t/p/original/${actorInfo.profile_path}`}

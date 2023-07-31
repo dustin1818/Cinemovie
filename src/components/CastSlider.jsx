@@ -49,7 +49,11 @@ const CastSlider = ({
             <LazyLoadImage
               effect="blur"
               className="!h-[130px] md:!h-[200px] lg:!h-[242px] md:!w-[182px] !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-              src={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
+              src={`${
+                cast.poster_path === null
+                  ? `https://kennyleeholmes.com/wp-content/uploads/2017/09/no-image-available.png`
+                  : `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
+              }`}
               alt={`https://image.tmdb.org/t/p/original/${cast.profile_path}`}
               onClick={() => goToActorPage(cast.id)}
             />
