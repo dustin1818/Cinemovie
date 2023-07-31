@@ -312,6 +312,8 @@ function App() {
                   toggleBtn2={toggleBtn2}
                   LazyLoadImage={LazyLoadImage}
                   useParams={useParams}
+                  setMovieSeriesID={setMovieSeriesID}
+                  useNavigate={useNavigate}
                 />
               }
             />
