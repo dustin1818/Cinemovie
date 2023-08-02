@@ -47,7 +47,7 @@ const CastOverview = ({
       </div>
 
       <div className="overview-details py-8">
-        <div className="movie-container grid gap-2 md:gap-3 lg:gap-4">
+        <div className="actors-movies-container grid gap-2 md:gap-3 lg:gap-4">
           {actorShows.map((shows, index) => (
             <div
               className="flex flex-col rounded"
@@ -57,7 +57,7 @@ const CastOverview = ({
               <div className="relative max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-t h-full rounded border-none ">
                 <LazyLoadImage
                   effect="blur"
-                  className="max-w-xs !transition !duration-300 !ease-in-out hover:!scale-105 lg:h-full rounded object-contain"
+                  className="max-w-xs h-[250px] !transition !duration-300 !ease-in-out hover:!scale-105 lg:h-full rounded object-contain"
                   src={`${
                     shows.poster_path === null
                       ? `https://kennyleeholmes.com/wp-content/uploads/2017/09/no-image-available.png`

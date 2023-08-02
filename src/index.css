@@ -122,6 +122,10 @@ body {
   height: 450px;
 }
 
+.actors-movies-container {
+  grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
+}
+
 @media screen and (min-width: 768px) {
   .movie-container {
     display: grid;
@@ -139,12 +143,19 @@ body {
   .youtubeVid {
     height: 100%;
   }
+
+  .actors-movies-container {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
 }
 
 @media screen and (min-width: 1020px) {
   .movie-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(326px, 1fr));
+  }
+  .actors-movies-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
 

@@ -13,6 +13,8 @@ const MovieDetails = ({
   SwiperSlide,
   Scrollbar,
 }) => {
+  const ref = useRef();
+
   //state for storing movie information
   const [movieDetails, setMovieDetails] = useState([]);
 
@@ -25,20 +27,27 @@ const MovieDetails = ({
   //state for movie recommendations
   const [recommendations, setRecommendations] = useState([]);
 
+  //state for reference Value
+  const [topElement, setTopElement] = useState(null);
+
+  //state for movie overview
+  const [movieOverview, setMovieOverview] = useState(true);
+
+  //state for video overview
+  const [videoOverview, setVideoOverview] = useState(true);
+
+  //state for photos overview
+  const [photosOverview, setPhotosOverview] = useState(true);
+
   // get id of the URL using PARAMS
   const { id } = useParams();
   localStorage.setItem("saveMovieID", JSON.parse(id));
   const getID = localStorage.getItem("saveMovieID");
   setMovieSeriesID(getID);
 
-  //state for Reference Value
-  const [topElement, setTopElement] = useState(null);
-
   const playTrailer = () => {
     setIsOverlayVisible(true);
   };
-
-  const ref = useRef();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -124,6 +133,23 @@ const MovieDetails = ({
     } else if (movieDetails.revenue < 900) {
       return movieDetails.revenue; // if value < 1000, nothing to do
     }
+  };
+
+  //onclick function for overview
+  const clickOverview = () => {
+    setMovieOverview(true);
+    setVideoOverview(false);
+    setPhotosOverview(false);
+  };
+  const clickVideoOverview = () => {
+    setMovieOverview(false);
+    setVideoOverview(true);
+    setPhotosOverview(false);
+  };
+  const clickPhotosOverview = () => {
+    setMovieOverview(false);
+    setVideoOverview(false);
+    setPhotosOverview(true);
   };
 
   return (
@@ -237,6 +263,12 @@ const MovieDetails = ({
         setMovieSeriesID={setMovieSeriesID}
         useNavigate={useNavigate}
         topElement={topElement}
+        clickOverview={clickOverview}
+        clickVideoOverview={clickVideoOverview}
+        clickPhotosOverview={clickPhotosOverview}
+        movieOverview={movieOverview}
+        videoOverview={videoOverview}
+        photosOverview={photosOverview}
       />
     </div>
   );

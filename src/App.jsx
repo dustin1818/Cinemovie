@@ -21,7 +21,7 @@ import "swiper/css/scrollbar";
 import { Scrollbar } from "swiper/modules";
 // import MiniLoader from "./components/MiniLoader";
 import BigLoader from "./components/BigLoader";
-import MovieDetails from "./components/MovieDetails";
+import MovieDetails from "./components/movie-Info/MovieDetails";
 import ShowingSlider from "./components/home-slider/ShowingSlider";
 import PopularSlider from "./components/home-slider/PopularSlider";
 import TopRatedSlider from "./components/home-slider/TopRatedSlider";
