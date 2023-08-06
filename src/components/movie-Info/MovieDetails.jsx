@@ -34,10 +34,10 @@ const MovieDetails = ({
   const [movieOverview, setMovieOverview] = useState(true);
 
   //state for video overview
-  const [videoOverview, setVideoOverview] = useState(true);
+  const [videoOverview, setVideoOverview] = useState(false);
 
   //state for photos overview
-  const [photosOverview, setPhotosOverview] = useState(true);
+  const [photosOverview, setPhotosOverview] = useState(false);
 
   // get id of the URL using PARAMS
   const { id } = useParams();
@@ -151,6 +151,8 @@ const MovieDetails = ({
     setVideoOverview(false);
     setPhotosOverview(true);
   };
+
+  console.log(movieseriesID);
 
   return (
     <div ref={ref} className="max-w-[1920px] mx-auto">

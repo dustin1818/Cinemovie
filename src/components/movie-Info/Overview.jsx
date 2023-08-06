@@ -23,6 +23,7 @@ const Overview = ({
   movieOverview,
   videoOverview,
   photosOverview,
+  movieseriesID,
 }) => {
   const fetchMovieDirector = () => {
     let director = "";
@@ -105,7 +106,7 @@ const Overview = ({
                     src={`${
                       movieDetails.poster_path === null
                         ? `https://kennyleeholmes.com/wp-content/uploads/2017/09/no-image-available.png`
-                        : `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+                        : `https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`
                     }`}
                     alt={`https://image.tmdb.org/t/p/original/${movieDetails.poster_path}`}
                     className="w-[300px] h-full object-contain object-top lg:object-top inline-block "
@@ -392,9 +393,13 @@ const Overview = ({
         </div>
       )}
 
-      <VideoOverview videoOverview={videoOverview} />
+      <VideoOverview videoOverview={videoOverview} toggleBtn2={toggleBtn2} />
 
-      <PhotosOverview photosOverview={photosOverview} />
+      <PhotosOverview
+        photosOverview={photosOverview}
+        LazyLoadImage={LazyLoadImage}
+        toggleBtn2={toggleBtn2}
+      />
     </div>
   );
 };
