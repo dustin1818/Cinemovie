@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AiFillPlayCircle } from "react-icons/ai";
+import { BsPlayCircle } from "react-icons/bs";
+import { FaPlay } from "react-icons/fa";
+import OverlayVidOverview from "./OverlayVidOverview";
 
 const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
   const [videoCollection, setVideoCollection] = useState([]);
+  //state for overlay
+  const [isOverlayVisible2, setIsOverlayVisible2] = useState(false);
+  const [youtubeID, SetYoutubeID] = useState("");
   const { id } = useParams();
   useEffect(() => {
     const fetchMovieVideos = async () => {
@@ -30,14 +37,24 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
     fetchMovieVideos();
   }, [id, toggleBtn2]);
 
-  console.log(videoCollection.length);
+  const openOverlay = (e) => {
+    SetYoutubeID(e);
+    setIsOverlayVisible2(true);
+  };
+
+  console.log(isOverlayVisible2);
+  console.log(youtubeID);
 
   return (
     <>
       {videoOverview && (
-        <div className="mt-20 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {videoCollection?.map((video) => (
-            <div className="h-[300px] lg:h-[450px]">
+        <div className="mt-10 md:mt-20 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {videoCollection?.map((video, index) => (
+            <div className="h-[300px] lg:h-[450px] relative" key={index}>
+              <AiFillPlayCircle
+                className="absolute top-0 right-0 left-0 bottom-0 h-24 w-full m-auto z-20 md:z-0"
+                onClick={() => openOverlay(video.key)}
+              />
               <iframe
                 loading="lazy"
                 width="100%"
@@ -59,6 +76,12 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
           </h1>
         </div>
       )}
+
+      <OverlayVidOverview
+        isOverlayVisible2={isOverlayVisible2}
+        setIsOverlayVisible2={setIsOverlayVisible2}
+        youtubeID={youtubeID}
+      />
     </>
   );
 };
