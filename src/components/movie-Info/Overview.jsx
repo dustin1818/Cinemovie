@@ -59,7 +59,7 @@ const Overview = ({
         <h3
           className={
             movieOverview === true
-              ? "uppercase font-semibold "
+              ? "uppercase font-semibold text-[#dc2626]"
               : "uppercase font-normal"
           }
           onClick={clickOverview}
@@ -72,7 +72,7 @@ const Overview = ({
         <h3
           className={
             videoOverview === true
-              ? "uppercase font-semibold "
+              ? "uppercase font-semibold text-[#dc2626]"
               : "uppercase font-normal"
           }
           onClick={clickVideoOverview}
@@ -83,8 +83,8 @@ const Overview = ({
         </h3>
         <h3
           className={
-            photosOverview === true
-              ? "uppercase font-semibold "
+            photosOverview === true 
+              ? "uppercase font-semibold text-[#dc2626]"
               : "uppercase font-normal"
           }
           onClick={clickPhotosOverview}
@@ -114,7 +114,7 @@ const Overview = ({
                 </div>
 
                 <div className="flex flex-col lg:ml-10 w-full lg:w-[1050px]">
-                  <p className="mb-2 text-xl md:text-2xl font-medium">
+                  <p className="mb-2 text-xl md:text-2xl font-medium ">
                     Storyline
                   </p>
                   <p className="mb-5">{movieDetails.overview}</p>

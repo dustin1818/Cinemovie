@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillPlayCircle } from "react-icons/ai";
+import {FaRegPlayCircle} from 'react-icons/fa'
 import { BsPlayCircle } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 import OverlayVidOverview from "./OverlayVidOverview";
@@ -51,8 +52,8 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
         <div className="mt-10 md:mt-20 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {videoCollection?.map((video, index) => (
             <div className="h-[300px] lg:h-[450px] relative" key={index}>
-              <AiFillPlayCircle
-                className="absolute top-0 right-0 left-0 bottom-0 h-24 w-full m-auto z-20 md:z-0"
+              <div
+                className="absolute top-0 right-0 left-0 bottom-0 h-full w-full bg-[#ff000000] m-auto z-20 md:z-0"
                 onClick={() => openOverlay(video.key)}
               />
               <iframe
