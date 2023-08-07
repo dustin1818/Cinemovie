@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AiFillPlayCircle } from "react-icons/ai";
-import {FaRegPlayCircle} from 'react-icons/fa'
-import { BsPlayCircle } from "react-icons/bs";
-import { FaPlay } from "react-icons/fa";
 import OverlayVidOverview from "./OverlayVidOverview";
 
 const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
