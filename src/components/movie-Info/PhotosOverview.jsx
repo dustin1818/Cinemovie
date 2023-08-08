@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {AiOutlineArrowRight, AiOutlineArrowLeft} from 'react-icons/ai'
+import OverlayPhotoOverview from "./OverlayPhotoOverview";
 
 const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
   const [photoCollection, setPhotoCollection] = useState([]);
   const { id } = useParams();
 
-
   // State for Photos Overlay Condition
-  // const [isPhotosOverlay, setIsPhotosOvelay] = useState(false);
+  const [isPhotosOverlay, setIsPhotosOverlay] = useState(false);
 
   //State for Storing Photos 
-    // const [photoID, setPhotoID] = useState('')
+    const [photoID, setPhotoID] = useState('')
 
   useEffect(() => {
     const fetchMovieVideos = async () => {
@@ -40,28 +39,13 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
     fetchMovieVideos();
   }, [id, toggleBtn2]);
 
-  const pictureOverlay = (e,f) => {
-    console.log(e,f)
+  const pictureOverlay = (imageLink,index) => {
+    console.log(imageLink,index)
+    setIsPhotosOverlay(true);
+    setPhotoID(imageLink);
   }
-
-  // logic for next picture
-  const nextPhoto = (e) => {
-    console.log('next page', e)
-    // const item = photoCollection.filter((photos) => photos[e] === e);
-    console.log(photoCollection[e - 1] , 'next photo array')
-  }
-  
-  //logic for previous picture
-  const prevPhoto = (e) => {
-    console.log('next page', e)
-    // const item = photoCollection.filter((photos) => photos[e] === e);
-    console.log(photoCollection[e + 1] , 'prev photo array')
-  }
-
 
   console.log(photoCollection);
-
-
 
   return (
     <>
@@ -81,12 +65,12 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
                 onClick ={() => pictureOverlay(photo.file_path, index + 1)}
               />
 
-              <AiOutlineArrowRight className="h[400px] w-full absolute left-0 right-0 top-0 bottom-0 bg-slate-500" onClick={() => nextPhoto(index + 2)}/>
-              <AiOutlineArrowLeft className="h[400px] w-full absolute left-0 right-0 top-0 bottom-0 bg-slate-500" onClick={() => prevPhoto(index - 2)}/>
             </div>
           ))}
         </div>
       )}
+
+      <OverlayPhotoOverview isPhotosOverlay={isPhotosOverlay} setIsPhotosOverlay={setIsPhotosOverlay} photoID={photoID} setPhotoID={setPhotoID} LazyLoadImage={LazyLoadImage} />
     </>
   );
 };

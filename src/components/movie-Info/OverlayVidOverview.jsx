@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
 const OverlayVidOverview = ({
