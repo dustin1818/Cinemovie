@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   AiOutlineClose,
   AiOutlineArrowRight,
@@ -10,18 +11,27 @@ const OverlayPhotoOverview = ({
   photoID,
   setPhotoID,
   LazyLoadImage,
+  photoLength,
+  photoIndex,
+  photoCollection,
+  setPhotoCollection,
+  setPhotoIndex,
 }) => {
   // logic for next picture
-  // const nextPhoto = (e) => {
-  //   console.log('next page', e)
-  //   console.log(photoCollection[e - 1] , 'next photo array')
-  // }
+  const nextPhoto = (e) => {
+    setPhotoIndex(() => photoIndex + 1);
+    setPhotoID(photoCollection[photoIndex + 1].file_path);
+  };
 
   //logic for previous picture
-  // const prevPhoto = (e) => {
-  //   console.log('next page', e)
-  //   console.log(photoCollection[e + 1] , 'prev photo array')
-  // }
+  const prevPhoto = (e) => {
+    if (photoIndex === 1) {
+      setPhotoIndex(1);
+    } else {
+      setPhotoIndex(photoIndex - 1);
+      setPhotoID(photoCollection[photoIndex - 1].file_path);
+    }
+  };
 
   return (
     <>
@@ -35,19 +45,33 @@ const OverlayPhotoOverview = ({
         >
           <LazyLoadImage
             effect="blur"
-            src = {`https://image.tmdb.org/t/p/original/${photoID}`}
+            src={`https://image.tmdb.org/t/p/original/${photoID}`}
             alt={`https://image.tmdb.org/t/p/original/${photoID}`}
-            className="w-full h-full object-cover"
+            className="w-full object-contain"
           />
           <AiOutlineClose
-            className=" absolute top-[20px] right-[20px]"
+            className=" absolute top-[20px] right-[20px] z-20"
             size={30}
             color="#ffffff"
             onClick={() => setIsPhotosOverlay(false)}
           />
 
-          {/* <AiOutlineArrowRight className="h[400px] w-full absolute left-0 right-0 top-0 bottom-0 bg-slate-500" onClick={() => nextPhoto(index + 2)}/>
-              <AiOutlineArrowLeft className="h[400px] w-full absolute left-0 right-0 top-0 bottom-0 bg-slate-500" onClick={() => prevPhoto(index - 2)}/> */}
+          <div className="flex justify-between items-center absolute top-0 right-0 bottom-0 left-0">
+            <AiOutlineArrowLeft
+              className="h-[50px] w-auto"
+              onClick={(e) => prevPhoto(e)}
+            />
+            <AiOutlineArrowRight
+              className="h-[50px]  w-auto"
+              onClick={(e) => nextPhoto(e)}
+            />
+          </div>
+
+          <div className="flex absolute left-0 right-0 bottom-0 mb-4 text-center w-full justify-center">
+            <p>
+              {photoIndex === 0 ? 1 : photoIndex}/{photoLength}
+            </p>
+          </div>
         </div>
       )}
     </>

@@ -9,8 +9,14 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
   // State for Photos Overlay Condition
   const [isPhotosOverlay, setIsPhotosOverlay] = useState(false);
 
-  //State for Storing Photos 
-    const [photoID, setPhotoID] = useState('')
+  //State for Storing Photos
+  const [photoID, setPhotoID] = useState("");
+
+  // State for Total Photos
+  const [photoLength, setPhotoLength] = useState(0);
+
+  //State for Photo Index Position
+  const [photoIndex, setPhotoIndex] = useState(1);
 
   useEffect(() => {
     const fetchMovieVideos = async () => {
@@ -39,20 +45,22 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
     fetchMovieVideos();
   }, [id, toggleBtn2]);
 
-  const pictureOverlay = (imageLink,index) => {
-    console.log(imageLink,index)
+  const pictureOverlay = (imageLink, index) => {
     setIsPhotosOverlay(true);
     setPhotoID(imageLink);
-  }
-
-  console.log(photoCollection);
+    setPhotoLength(photoCollection.length);
+    setPhotoIndex(index);
+  };
 
   return (
     <>
       {photosOverview && (
         <div className="mt-20 pb-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap">
-          {photoCollection?.map((photo,index) => (
-            <div className="w-full h-full relative overflow-hidden bg-cover bg-no-repeat" key={index}>
+          {photoCollection?.map((photo, index) => (
+            <div
+              className="w-full h-full relative overflow-hidden bg-cover bg-no-repeat"
+              key={index}
+            >
               <LazyLoadImage
                 effect="blur"
                 src={`${
@@ -62,15 +70,25 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
                 }`}
                 alt={`https://image.tmdb.org/t/p/original/${photo.file_path}`}
                 className="w-full h-full object-cover object-top lg:object-top inline-block !transition !duration-300 !ease-in-out hover:!scale-[1.05]"
-                onClick ={() => pictureOverlay(photo.file_path, index + 1)}
+                onClick={() => pictureOverlay(photo.file_path, index + 1)}
               />
-
             </div>
           ))}
         </div>
       )}
 
-      <OverlayPhotoOverview isPhotosOverlay={isPhotosOverlay} setIsPhotosOverlay={setIsPhotosOverlay} photoID={photoID} setPhotoID={setPhotoID} LazyLoadImage={LazyLoadImage} />
+      <OverlayPhotoOverview
+        isPhotosOverlay={isPhotosOverlay}
+        setIsPhotosOverlay={setIsPhotosOverlay}
+        photoID={photoID}
+        setPhotoID={setPhotoID}
+        LazyLoadImage={LazyLoadImage}
+        photoLength={photoLength}
+        photoIndex={photoIndex}
+        photoCollection={photoCollection}
+        setPhotoCollection={setPhotoCollection}
+        setPhotoIndex={setPhotoIndex}
+      />
     </>
   );
 };
