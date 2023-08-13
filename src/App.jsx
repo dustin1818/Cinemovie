@@ -27,6 +27,7 @@ import PopularSlider from "./components/home-slider/PopularSlider";
 import TopRatedSlider from "./components/home-slider/TopRatedSlider";
 import UpcomingSlider from "./components/home-slider/UpcomingSlider";
 import Cast from "./components/Cast";
+import SearchPage from "./components/SearchPage";
 
 function App() {
   const [moviesAPI, setMoviesAPI] = useState("movies api");
@@ -314,6 +315,18 @@ function App() {
                   useParams={useParams}
                   setMovieSeriesID={setMovieSeriesID}
                   useNavigate={useNavigate}
+                />
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <SearchPage
+                  toggleBtn2={toggleBtn2}
+                  LazyLoadImage={LazyLoadImage}
+                  setMovieSeriesID={setMovieSeriesID}
+                  useNavigate={useNavigate}
+                  options={options}
                 />
               }
             />

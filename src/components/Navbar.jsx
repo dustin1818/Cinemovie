@@ -12,6 +12,9 @@ const Navbar = ({
   setLoading,
 }) => {
   const [toggleBtn, setToggleBtn] = useState(false);
+
+  const [searchVariable, setSearchVariable] = useState("");
+
   if (toggleBtn2 === false) {
     console.log(seriesAPI);
   } else {
@@ -26,6 +29,22 @@ const Navbar = ({
     }, 2000);
     navigate("/");
   };
+
+  const searchResult = (e) => {
+    if (e.keyCode === 13) {
+      console.log("enter key pressed");
+      console.log(e.target.value.trim());
+      setSearchVariable(e.target.value.trim());
+      setTimeout(() => {
+        setLoading(true);
+        setLoading(false);
+        navigate("/search");
+      }, 1000);
+    }
+  };
+
+  localStorage.setItem("SearchVar", searchVariable);
+
   return (
     <div className="max-w-full lg:max-w-[1920px] mx-auto flex justify-between items-center p-4">
       <div className="flex items-center">
@@ -81,6 +100,7 @@ const Navbar = ({
           className="bg-transparent p-2 w-full focus:outline-none text-sm"
           type="text"
           placeholder="Search movies / series..."
+          onKeyDown={(e) => searchResult(e)}
         />
       </div>
 
@@ -102,7 +122,10 @@ const Navbar = ({
             onClick={(e) => setToggleBtn(!toggleBtn)}
           />
 
-          <a className="text-2xl p-4 w-fit " onClick={() => loadLogo()}>
+          <a
+            className="text-2xl md:text-3xl p-4 w-fit "
+            onClick={() => loadLogo()}
+          >
             Cine<span className="font-bold">movie</span>
           </a>
         </div>
