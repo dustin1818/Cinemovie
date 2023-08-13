@@ -42,6 +42,12 @@ const Showing = ({ toggleBtn2, options, useNavigate, setMovieSeriesID }) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const navigate = useNavigate();
+  const goToDetailsPage = (id) => {
+    setMovieSeriesID(id);
+    navigate(`/info/${id}`);
+  };
+
   return (
     <div ref={ref} className="max-w-[1920px] mx-auto p-4 py-8">
       {toggleBtn2 ? (

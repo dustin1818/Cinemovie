@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import OverlayPhotoOverview from "./OverlayPhotoOverview";
+import CastPhotoOverlay from "./CastPhotoOverlay";
 
-const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
+const PhotosOverview = ({ photosOverview, LazyLoadImage, actorID }) => {
   const [photoCollection, setPhotoCollection] = useState([]);
-  const { id } = useParams();
 
   // State for Photos Overlay Condition
   const [isPhotosOverlay, setIsPhotosOverlay] = useState(false);
@@ -29,21 +27,18 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOTIyZGQ1NjIwN2QzZmU5ODMyNTI1NDEwZWQ3NDZmMiIsInN1YiI6IjYxMDkxMWExMmY4ZDA5MDA0OGU5ZWQ5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EL9RLiEv0kAhIhDOY0UnQkka_X4fTF5Lqa10DPFJBNg",
           },
         };
-        const API_URL = toggleBtn2
-          ? `https://api.themoviedb.org/3/movie/${id}/images`
-          : `https://api.themoviedb.org/3/tv/${id}/images`;
+        const API_URL = `https://api.themoviedb.org/3/person/${actorID}/images`;
 
         const response = await fetch(API_URL, options);
         const data = await response.json();
-        console.log(data);
-        setPhotoCollection(data.backdrops);
+        setPhotoCollection(data.profiles);
       } catch (e) {
         console.log("Error", e);
       }
     };
 
     fetchMoviePhotos();
-  }, [id, toggleBtn2]);
+  }, [actorID]);
 
   const pictureOverlay = (imageLink, index) => {
     setIsPhotosOverlay(true);
@@ -77,7 +72,7 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
         </div>
       )}
 
-      <OverlayPhotoOverview
+      <CastPhotoOverlay
         isPhotosOverlay={isPhotosOverlay}
         setIsPhotosOverlay={setIsPhotosOverlay}
         photoID={photoID}

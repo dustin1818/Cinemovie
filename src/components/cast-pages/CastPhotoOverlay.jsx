@@ -4,7 +4,7 @@ import {
   AiOutlineArrowLeft,
 } from "react-icons/ai";
 
-const OverlayPhotoOverview = ({
+const CastPhotoOverlay = ({
   isPhotosOverlay,
   setIsPhotosOverlay,
   photoID,
@@ -87,4 +87,4 @@ const OverlayPhotoOverview = ({
   );
 };
 
-export default OverlayPhotoOverview;
+export default CastPhotoOverlay;

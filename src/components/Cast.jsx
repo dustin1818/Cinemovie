@@ -9,10 +9,19 @@ const Cast = ({
   setMovieSeriesID,
   useNavigate,
 }) => {
+  //state for movie actor info
   const [actorInfo, setActorInfo] = useState([]);
   const { id } = useParams();
-
   const navigate = useNavigate();
+
+  //state for movie overview
+  const [movieOverview, setMovieOverview] = useState(true);
+
+  //state for credit overview
+  const [creditOverview, setCreditOverview] = useState(false);
+
+  //state for photos overview
+  const [photosOverview, setPhotosOverview] = useState(false);
 
   useEffect(() => {
     const fetchActorInfo = async () => {
@@ -51,8 +60,10 @@ const Cast = ({
     year: "numeric",
   });
 
+  console.log(actorInfo);
+
   return (
-    <div className="max-w-[1920px] mx-auto p-4 py-8 bg-zinc-900 text-white h-full">
+    <div className="max-w-full lg:max-w-[1920px] mx-auto p-4 py-8 bg-zinc-900 text-white h-full">
       <h2 className="font-medium md:text-xl mb-4">{actorInfo?.name}</h2>
       <div className="flex flex-col">
         <div className="block lg:flex lg:flex-col">
@@ -94,6 +105,12 @@ const Cast = ({
           LazyLoadImage={LazyLoadImage}
           setMovieSeriesID={setMovieSeriesID}
           navigate={navigate}
+          movieOverview={movieOverview}
+          setMovieOverview={setMovieOverview}
+          creditOverview={creditOverview}
+          setCreditOverview={setCreditOverview}
+          photosOverview={photosOverview}
+          setPhotosOverview={setPhotosOverview}
         />
       </div>
     </div>
