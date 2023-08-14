@@ -28,6 +28,8 @@ import TopRatedSlider from "./components/home-slider/TopRatedSlider";
 import UpcomingSlider from "./components/home-slider/UpcomingSlider";
 import Cast from "./components/Cast";
 import SearchPage from "./components/SearchPage";
+import Trending from "./components/pages/Trending";
+import TrendingSlider from "./components/home-slider/TrendingSlider";
 
 function App() {
   const [moviesAPI, setMoviesAPI] = useState("movies api");
@@ -40,6 +42,7 @@ function App() {
 
   // FETCHING MOVIES/SERIES
   const [showingMovies, setShowingMovies] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
@@ -50,6 +53,10 @@ function App() {
   let API_URL_NEW = toggleBtn2
     ? "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
     : "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1";
+
+  let API_URL_TRENDING = toggleBtn2
+    ? `https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=1`
+    : `https://api.themoviedb.org/3/trending/tv/day?language=en-US&page=1`;
 
   let API_URL_POPULAR = toggleBtn2
     ? "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
@@ -94,14 +101,21 @@ function App() {
           throw new Error(
             "Network response for Upcoming Movies/Series was not ok"
           );
+        const response5 = await fetch(API_URL_TRENDING, options);
+        if (!response5.ok)
+          throw new Error(
+            "Network response for Trending Movies/Series was not ok"
+          );
         const data = await response.json();
         const data2 = await response2.json();
         const data3 = await response3.json();
         const data4 = await response4.json();
+        const data5 = await response5.json();
         setShowingMovies(data);
         setPopularMovies(data2);
         setTopRatedMovies(data3);
         setUpcomingMovies(data4);
+        setTrendingMovies(data5);
       } catch (e) {
         console.log("Error Try Catch Block: ", e);
       } finally {
@@ -167,6 +181,30 @@ function App() {
                     <div className="flex flex-row w-100 md:w-100">
                       <ShowingSlider
                         showingMovies={showingMovies}
+                        setMovieSeriesID={setMovieSeriesID}
+                        LazyLoadImage={LazyLoadImage}
+                        Swiper={Swiper}
+                        SwiperSlide={SwiperSlide}
+                        Scrollbar={Scrollbar}
+                        useNavigate={useNavigate}
+                      />
+                    </div>
+                  </section>
+
+                  {/* Trending Movies Section  */}
+                  <section className="mt-6 md:mt-10">
+                    {toggleBtn2 ? (
+                      <h1 className="text-xl md:text-2xl mb-5">
+                        <span className="font-bold">Trending</span> Movies
+                      </h1>
+                    ) : (
+                      <h1 className="text-xl md:text-2xl mb-5">
+                        <span className="font-bold">Trending</span> Series
+                      </h1>
+                    )}
+                    <div className="flex flex-row w-100 md:w-100">
+                      <TrendingSlider
+                        trendingMovies={trendingMovies}
                         setMovieSeriesID={setMovieSeriesID}
                         LazyLoadImage={LazyLoadImage}
                         Swiper={Swiper}
@@ -248,6 +286,18 @@ function App() {
               path="/showing"
               element={
                 <Showing
+                  options={options}
+                  toggleBtn2={toggleBtn2}
+                  useNavigate={useNavigate}
+                  setMovieSeriesID={setMovieSeriesID}
+                  LazyLoadImage={LazyLoadImage}
+                />
+              }
+            />
+            <Route
+              path="/trending"
+              element={
+                <Trending
                   options={options}
                   toggleBtn2={toggleBtn2}
                   useNavigate={useNavigate}

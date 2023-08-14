@@ -146,6 +146,12 @@ const Navbar = ({
             </a>
             <a
               className="text-xl py-4 w-fit "
+              onClick={() => navigate("/trending")}
+            >
+              Trending
+            </a>
+            <a
+              className="text-xl py-4 w-fit "
               onClick={() => navigate("/popular")}
             >
               Popular
