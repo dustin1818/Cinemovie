@@ -7,6 +7,10 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
   //state for overlay
   const [isOverlayVisible2, setIsOverlayVisible2] = useState(false);
   const [youtubeID, SetYoutubeID] = useState("");
+
+  //state for filtering data
+  const [selectedData, setSelectedData] = useState("");
+
   const { id } = useParams();
   useEffect(() => {
     const fetchMovieVideos = async () => {
@@ -25,6 +29,7 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
 
         const response = await fetch(API_URL, options);
         const data = await response.json();
+        console.log(data);
         setVideoCollection(data.results);
       } catch (e) {
         console.log("Error", e);
@@ -39,30 +44,44 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
     setIsOverlayVisible2(true);
   };
 
-  console.log(isOverlayVisible2);
-  console.log(youtubeID);
+  const handleChange = (e) => {
+    setSelectedData(e.target.value);
+  };
+
+  const filteredData =
+    selectedData === "All"
+      ? videoCollection
+      : videoCollection.filter((videos) => videos.type === selectedData);
 
   return (
     <>
       {videoOverview && (
-        <div className="mt-10 md:mt-20 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {videoCollection?.map((video, index) => (
-            <div className="h-[300px] lg:h-[450px] relative" key={index}>
-              <div
-                className="absolute top-0 right-0 left-0 bottom-0 h-full w-full bg-[#ff000000] m-auto z-20 md:z-0"
-                onClick={() => openOverlay(video.key)}
-              />
-              <iframe
-                loading="lazy"
-                width="100%"
-                height="100%"
-                src={`https://www.youtube.com/embed/${video.key}`}
-                title={video.name}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-          ))}
+        <div className="block mt-5">
+          <select value={selectedData} onChange={handleChange}>
+            <option value="All">All</option>
+            <option value="Teaser">Teaser</option>
+            <option value="Clip">Clip</option>
+            <option value="Featurette">Featurette</option>
+          </select>
+          <div className="mt-5 md:mt-20 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {filteredData?.map((video, index) => (
+              <div className="h-[300px] lg:h-[450px] relative" key={index}>
+                <div
+                  className="absolute top-0 right-0 left-0 bottom-0 h-full w-full bg-[#ff000000] m-auto z-20 md:z-0"
+                  onClick={() => openOverlay(video.key)}
+                />
+                <iframe
+                  loading="lazy"
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                  title={video.name}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
