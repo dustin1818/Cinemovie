@@ -57,13 +57,31 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
     <>
       {videoOverview && (
         <div className="block mt-5">
-          <select value={selectedData} onChange={handleChange}>
+          <select className=" text-slate-900 p-1 rounded" value={selectedData} onChange={handleChange}>
             <option value="All">All</option>
             <option value="Teaser">Teaser</option>
             <option value="Clip">Clip</option>
             <option value="Featurette">Featurette</option>
           </select>
           <div className="mt-5 md:mt-20 pb-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            {selectedData === "" && videoCollection?.map((video, index) => (
+              <div className="h-[300px] lg:h-[450px] relative" key={index}>
+                <div
+                  className="absolute top-0 right-0 left-0 bottom-0 h-full w-full bg-[#ff000000] m-auto z-20 md:z-0"
+                  onClick={() => openOverlay(video.key)}
+                />
+                <iframe
+                  loading="lazy"
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${video.key}`}
+                  title={video.name}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ))}
             {filteredData?.map((video, index) => (
               <div className="h-[300px] lg:h-[450px] relative" key={index}>
                 <div
