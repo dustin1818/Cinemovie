@@ -152,7 +152,6 @@ const MovieDetails = ({
     setPhotosOverview(true);
   };
 
-  console.log(movieseriesID);
 
   return (
     <div ref={ref} className="max-w-[1920px] mx-auto">
@@ -270,6 +269,7 @@ const MovieDetails = ({
         clickPhotosOverview={clickPhotosOverview}
         movieOverview={movieOverview}
         videoOverview={videoOverview}
+        movieseriesID={movieseriesID}
         photosOverview={photosOverview}
       />
     </div>

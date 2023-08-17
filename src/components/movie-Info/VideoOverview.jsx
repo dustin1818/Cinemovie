@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import OverlayVidOverview from "./OverlayVidOverview";
 
-const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
+const VideoOverview = ({ videoOverview, toggleBtn2,movieseriesID }) => {
   const [videoCollection, setVideoCollection] = useState([]);
   //state for overlay
   const [isOverlayVisible2, setIsOverlayVisible2] = useState(false);
@@ -11,7 +10,6 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
   //state for filtering data
   const [selectedData, setSelectedData] = useState("");
 
-  const { id } = useParams();
   useEffect(() => {
     const fetchMovieVideos = async () => {
       try {
@@ -24,8 +22,8 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
           },
         };
         const API_URL = toggleBtn2
-          ? `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`
-          : `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`;
+          ? `https://api.themoviedb.org/3/movie/${movieseriesID}/videos?language=en-US`
+          : `https://api.themoviedb.org/3/tv/${movieseriesID}/videos?language=en-US`;
 
         const response = await fetch(API_URL, options);
         const data = await response.json();
@@ -37,7 +35,8 @@ const VideoOverview = ({ videoOverview, toggleBtn2 }) => {
     };
 
     fetchMovieVideos();
-  }, [id, toggleBtn2]);
+  }, [movieseriesID, toggleBtn2]);
+
 
   const openOverlay = (e) => {
     SetYoutubeID(e);

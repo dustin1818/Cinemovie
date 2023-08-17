@@ -393,12 +393,13 @@ const Overview = ({
         </div>
       )}
 
-      <VideoOverview videoOverview={videoOverview} toggleBtn2={toggleBtn2} />
+      <VideoOverview videoOverview={videoOverview} toggleBtn2={toggleBtn2} movieseriesID={movieseriesID} />
 
       <PhotosOverview
         photosOverview={photosOverview}
         LazyLoadImage={LazyLoadImage}
         toggleBtn2={toggleBtn2}
+        movieseriesID={movieseriesID}
       />
     </div>
   );

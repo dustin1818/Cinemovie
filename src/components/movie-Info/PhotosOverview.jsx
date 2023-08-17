@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import OverlayPhotoOverview from "./OverlayPhotoOverview";
 
-const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
+const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage,movieseriesID }) => {
   const [photoCollection, setPhotoCollection] = useState([]);
-  const { id } = useParams();
-
   // State for Photos Overlay Condition
   const [isPhotosOverlay, setIsPhotosOverlay] = useState(false);
 
@@ -30,8 +27,8 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
           },
         };
         const API_URL = toggleBtn2
-          ? `https://api.themoviedb.org/3/movie/${id}/images`
-          : `https://api.themoviedb.org/3/tv/${id}/images`;
+          ? `https://api.themoviedb.org/3/movie/${movieseriesID}/images`
+          : `https://api.themoviedb.org/3/tv/${movieseriesID}/images`;
 
         const response = await fetch(API_URL, options);
         const data = await response.json();
@@ -43,7 +40,7 @@ const PhotosOverview = ({ photosOverview, toggleBtn2, LazyLoadImage }) => {
     };
 
     fetchMoviePhotos();
-  }, [id, toggleBtn2]);
+  }, [movieseriesID, toggleBtn2]);
 
   const pictureOverlay = (imageLink, index) => {
     setIsPhotosOverlay(true);
