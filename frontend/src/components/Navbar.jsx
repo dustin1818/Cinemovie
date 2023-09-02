@@ -31,7 +31,7 @@ const Navbar = ({
   };
 
   const searchResult = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && e.target.value.trim() !== "") {
       console.log("enter key pressed");
       console.log(e.target.value.trim());
       setSearchVariable(e.target.value.trim());
